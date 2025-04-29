@@ -147,7 +147,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
@@ -157,17 +157,18 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMTJlMWQxMzgtY2I4OC00ZmIyLWI2MGMtMThjNzk5YjJiZDVhIiwidGVuYW50X2lkIjoiMzA3OTliMTU2MzIyMzNmMTk1MTE4NTk4MDc3YmExZjNkYjk4MzdkYjA4ZWRmODlmYTFhMTcyN2Y2YTg0OTFkZiIsImludGVybmFsX3NlY3JldCI6ImE3NDdjMjU0LWU2ZGItNDJlMC1iMGE0LTQ3NGI4OGFlZTY0MCJ9.ECB6RVgfPg6E_0_kU_snJgB-7ZdBC7BcHNQxOU_4wRo"
+        "value": null
       }
     }
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id    Int     @id @default(autoincrement())\n  email String  @unique\n  name  String?\n}\n",
   "inlineSchemaHash": "75de2b1cd6c7127581f557a06335fdc5ae9d311e18f2f2f54d03a6dcee6c4737",
-  "copyEngine": false
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -204,3 +205,9 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "src/generated/prisma/schema.prisma")
