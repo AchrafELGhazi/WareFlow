@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "/src/index.ts",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts",
+    "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
@@ -19,7 +19,8 @@
     "helmet": "^8.1.0",
     "logger": "^0.0.1",
     "morgan": "^1.10.0",
-    "pino": "^9.6.0"
+    "pino": "^9.6.0",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
