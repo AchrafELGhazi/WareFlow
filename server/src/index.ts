@@ -24,11 +24,17 @@ app.listen(port, () => {
   const user = await prisma.user.create({
     data: {
       name: 'Johns Doe',
-      email: 'joffsf',
+      email: 'joffsddf',
     },
   });
   console.log(user);
-})();
+  })();
+
+
+  (async () => {
+    const users = await prisma.user.findMany()
+    console.log(users);
+  })()
 
 });
 
