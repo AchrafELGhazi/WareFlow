@@ -8,11 +8,9 @@ import StatsSection from './components/StatsSection';
 import NewsletterSection from './components/NewsletterSection';
 import Footer from '@/shared/Footer';
 import PartnersSection from './components/PartnersSection';
-import useTheme from '@/shared/Hooks/useTheme';
 import { motion } from 'framer-motion';
 
 const Home: React.FC = () => {
-  const { isDarkMode } = useTheme();
 
   const featuresRef = useRef<HTMLDivElement>(null);
   const demoRef = useRef<HTMLDivElement>(null);

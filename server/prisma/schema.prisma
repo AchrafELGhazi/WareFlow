@@ -8,14 +8,31 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id          Int     @id @default(autoincrement()) // Integer, auto-incrementing primary key
+  email       String  @unique                       // String, must be unique (e.g., for login)
+  name        String?                               // Optional string (nullable name field)
+  isAdmin     Boolean @default(false)               // Boolean, defaults to false
+  largeNumber BigInt                                // BigInt for very large integer values
+  rating      Float   @default(0)                   // Floating-point number, defaults to 0
+  createdAt   DateTime @default(now())              // Timestamp for when the user was created
+  updatedAt   DateTime @updatedAt                   // Timestamp that updates automatically on update
+  preferences Json?                                 // Optional JSON field (can store settings, config, etc.)
+  posts       Post[]                                // One-to-many relation: a user can have many posts
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())  // Integer, auto-incrementing primary key
+  title     String                                  // Required string (title of the post)
+  content   String?                                 // Optional string (the content of the post)
+  published Boolean   @default(false)               // Boolean, indicates if the post is published
+  authorId  Int                                     // Foreign key linking to User model
+  author    User     @relation(fields: [authorId], references: [id]) // Many-to-one: each post belongs to one user
+  createdAt DateTime @default(now())                // Timestamp for when the post was created
+  updatedAt DateTime @updatedAt                     // Timestamp that updates automatically on update
 }
