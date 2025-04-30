@@ -13,26 +13,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// these two models are here for documentation purposes
+// and are not used in the actual database
+
 model User {
-  id          Int     @id @default(autoincrement()) // Integer, auto-incrementing primary key
-  email       String  @unique                       // String, must be unique (e.g., for login)
-  name        String?                               // Optional string (nullable name field)
-  isAdmin     Boolean @default(false)               // Boolean, defaults to false
-  largeNumber BigInt                                // BigInt for very large integer values
-  rating      Float   @default(0)                   // Floating-point number, defaults to 0
-  createdAt   DateTime @default(now())              // Timestamp for when the user was created
-  updatedAt   DateTime @updatedAt                   // Timestamp that updates automatically on update
-  preferences Json?                                 // Optional JSON field (can store settings, config, etc.)
-  posts       Post[]                                // One-to-many relation: a user can have many posts
+  id             Int             @id @default(autoincrement()) // Integer, auto-incrementing primary key  !!!!! BETTER USE UUID !!!!!
+  email          String          @unique // String, must be unique (e.g., for login)
+  name           String? // Optional string (nullable name field)
+  isAdmin        Boolean         @default(false) // Boolean, defaults to false
+  largeNumber    BigInt // BigInt for very large integer values
+  rating         Float           @default(0) // Floating-point number, defaults to 0
+  createdAt      DateTime        @default(now()) // Timestamp for when the user was created
+  updatedAt      DateTime        @updatedAt // Timestamp that updates automatically on update
+  // preferences    Json? // Optional JSON field (can store settings, config, etc.)
+  writtenPosts   Post[]          @relation("WrittenPosts") // One-to-many relation: a user can have many posts
+  favoritedPosts Post[]          @relation("FavoritedPosts") // One-to-many relation: a user can have many favorite posts
+  blob           Bytes? // Optional binary data field (e.g., for images, files)
+  UserPreference UserPreference? // One-to-one relation: each user has one preference
+}
+
+model UserPreference {
+  id           String   @id @default(uuid()) // UUID, unique identifier for the preference
+  emailUpdates Boolean?
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int  @unique // Foreign key linking to User model
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())  // Integer, auto-incrementing primary key
-  title     String                                  // Required string (title of the post)
-  content   String?                                 // Optional string (the content of the post)
-  published Boolean   @default(false)               // Boolean, indicates if the post is published
-  authorId  Int                                     // Foreign key linking to User model
-  author    User     @relation(fields: [authorId], references: [id]) // Many-to-one: each post belongs to one user
-  createdAt DateTime @default(now())                // Timestamp for when the post was created
-  updatedAt DateTime @updatedAt                     // Timestamp that updates automatically on update
+  id            String     @id @default(uuid()) // uuid, unique identifier for the post
+  title         String // Required string (title of the post)
+  content       String? // Optional string (the content of the post)
+  published     Boolean    @default(false) // Boolean, indicates if the post is published
+  author        User       @relation("WrittenPosts", fields: [authorId], references: [id]) // Many-to-one: each post belongs to one user
+  authorId      Int // Foreign key linking to User model
+  favoritedBy   User?      @relation("FavoritedPosts", fields: [favoritedById], references: [id]) // Many-to-one: each post can be favorited by one user
+  favoritedById Int? // Foreign key linking to User model
+  categories    Category[] // Many-to-many relation: a post can belong to many categories
+
+  createdAt DateTime @default(now()) // Timestamp for when the post was created
+  updatedAt DateTime @updatedAt // Timestamp that updates automatically on update
+}
+
+model Category {
+  id    String @id @default(uuid()) // Integer, auto-incrementing primary key
+  name  String @unique // String, must be unique (e.g., for category name)
+  posts Post[] // many-to-many relation: a category can have many posts
 }

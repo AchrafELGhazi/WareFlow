@@ -12,7 +12,6 @@ import { motion } from 'framer-motion';
 
 const Home: React.FC = () => {
 
-  const featuresRef = useRef<HTMLDivElement>(null);
   const demoRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
   const faqRef = useRef<HTMLDivElement>(null);
