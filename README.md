@@ -1,6 +1,5 @@
 # 🏢 Warehouse Management System (WMS)
 
-[![GitHub Actions](https://img.shields.io/github/workflow/status/your-username/wareflow/CI)](https://github.com/your-username/wareflow/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://www.docker.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
@@ -182,6 +181,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions, issues, or feature requests, please use the GitHub Issues or contact me at a.elghazi@aui.ma .
 
-<p align="left">
+<p align="center">
   Built with ❤️ (and for a class project) by the WMS Team
 </p>
