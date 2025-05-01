@@ -59,7 +59,7 @@ const FeaturesSection: React.FC = () => {
 
   const heroRef = useRef<HTMLDivElement>(null);
   // Background for the entire section
-  const sectionBackground = isDarkMode ? 'bg-[#030712]' : 'bg-slate-50';
+  // const sectionBackground = isDarkMode ? 'bg-[#030712]' : 'bg-slate-50';
 
   // Text colorsconst [isHovered, setIsHovered] = useState(false);
 
@@ -68,8 +68,8 @@ const FeaturesSection: React.FC = () => {
     offset: ['start start', 'end start'],
   });
 
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  // const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
   const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   // Advanced particle effect

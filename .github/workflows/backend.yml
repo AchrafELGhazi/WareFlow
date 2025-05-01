@@ -11,10 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up job
-        run: echo "Starting backend build..."
-
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Use Node 20.x
@@ -22,8 +19,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies for backend
+      - name: Install dependencies
         run: npm ci
+        working-directory: ./server
 
-      - name: Run build for backend
+      - name: Build backend
         run: npm run build
+        working-directory: ./server
