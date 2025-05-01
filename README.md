@@ -1,5 +1,6 @@
 # 🏢 Warehouse Management System (WMS)
 
+[![GitHub Actions](https://img.shields.io/github/workflow/status/your-username/wareflow/CI)](https://github.com/your-username/wareflow/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://www.docker.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
@@ -71,7 +72,7 @@ The Warehouse Management System (WMS) is a modern full-stack application designe
 
 ### Prerequisites
 
-- Node.js (v20+)
+- Node.js (v16+)
 - npm or yarn
 - Docker and Docker Compose (recommended)
 - PostgreSQL (if not using Docker)
@@ -170,17 +171,18 @@ Please ensure your code adheres to our coding standards and includes appropriate
 
 ## 👥 Meet the Team
 
-- **Achraf El Ghazi** - 
-- **Ikram Ghala** - 
-- **Marwa Errahmani** -
+- **[Achraf El Ghazi](https://github.com/achrafelghazi)** -
+- **[Ikram Ghala](https://github.com/ikram062)** - 
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+```
+
 ## 📞 Support
 
-For questions, issues, or feature requests, please use the GitHub Issues or contact me at a.elghazi@aui.ma
+For questions, issues, or feature requests, please use the GitHub Issues or contact the team at support@wareflow.example.com.
 
 ---
 
