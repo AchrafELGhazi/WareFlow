@@ -1,0 +1,29 @@
+name: Express Building Backend
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  buildbackend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up job
+        run: echo "Starting backend build..."
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies for backend
+        run: npm ci
+
+      - name: Run build for backend
+        run: npm run build

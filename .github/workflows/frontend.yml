@@ -1,4 +1,4 @@
-name: Express Building Backend
+name: Express Building Frontend
 
 on:
   push:
@@ -7,12 +7,12 @@ on:
     branches: [main]
 
 jobs:
-    buildbackend:
+  buildfrontend:
     runs-on: ubuntu-latest
 
     steps:
       - name: Set up job
-        run: echo "Starting backend build..."
+        run: echo "Starting frontend build..."
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -22,8 +22,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies for backend
+      - name: Install dependencies for frontend
         run: npm ci
+        working-directory: ./web
 
-      - name: Run build for backend
+      - name: Run build for frontend
         run: npm run build
+        working-directory: ./web
