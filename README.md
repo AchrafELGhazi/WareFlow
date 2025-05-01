@@ -180,8 +180,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-For questions, issues, or feature requests, please use the GitHub Issues or contact me at a.elghazi@aui.ma
----
+For questions, issues, or feature requests, please use the GitHub Issues or contact me at a.elghazi@aui.ma .
 
 <p align="left">
   Built with ❤️ (and for a class project) by the WMS Team
