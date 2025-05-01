@@ -1,0 +1,26 @@
+# Use Node.js as the base image for building the frontend
+FROM node:20
+
+# Set the working directory inside the container to '/app'
+WORKDIR /app
+
+# Copy package.json and package-lock.json for npm dependency installation
+COPY web/package*.json ./
+
+# Install frontend dependencies using npm
+RUN npm install
+
+# Copy all the files from the 'web' directory into the container
+COPY web/ ./
+
+# Build the React app for production
+RUN npm run build
+
+# Install 'serve' to serve the React app (to serve static files after the build)
+RUN npm install -g serve
+
+# Expose port 3000 (React app will run on this port)
+EXPOSE 3000
+
+# Use 'serve' to serve the built React app
+CMD ["serve", "-s", "build"]

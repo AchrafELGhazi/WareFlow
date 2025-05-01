@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # Service for the backend (Express/Node.js)
+  server:
+    # Build from the Dockerfile-server
+    build:
+      context: .  # Context should be the root of the project where the Dockerfiles exist
+      dockerfile: Dockerfile-server  # Use Dockerfile-server for backend service
+    container_name: server
+    ports:
+      - "5000:5000"
+    networks:
+      - wareflow-net
+    depends_on:
+      - db
+
+  # Service for the frontend (React)
+  web:
+    # Build from the Dockerfile-web
+    build:
+      context: .  # Context is the root folder
+      dockerfile: Dockerfile-web  # Use Dockerfile-web for frontend service
+    container_name: web
+    ports:
+      - "3000:3000"
+    networks:
+      - wareflow-net
+    depends_on:
+      - server
+
+  # PostgreSQL service
+  db:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: wareflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - wareflow-net
+
+# Define a custom network for the containers to communicate
+networks:
+  wareflow-net:
+    driver: bridge
+
+# Define a named volume for PostgreSQL data storage
+volumes:
+  postgres-data:
