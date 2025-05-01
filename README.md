@@ -11,7 +11,6 @@
 
 The Warehouse Management System (WMS) is a modern full-stack application designed to revolutionize warehouse operations for businesses of all sizes. By leveraging a robust tech stack of React, Express.js, and PostgreSQL, WMS enables companies to track products in real-time, manage inventory with precision, and automate critical workflows.
 
-![WMS Dashboard Preview](https://via.placeholder.com/800x400?text=WMS+Dashboard+Preview)
 
 ### Why Choose WMS?
 
