@@ -1,6 +1,5 @@
 # 🏢 Warehouse Management System (WMS)
 
-[![GitHub Actions](https://img.shields.io/github/workflow/status/your-username/wareflow/CI)](https://github.com/your-username/wareflow/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://www.docker.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
@@ -72,7 +71,7 @@ The Warehouse Management System (WMS) is a modern full-stack application designe
 
 ### Prerequisites
 
-- Node.js (v16+)
+- Node.js (v20+)
 - npm or yarn
 - Docker and Docker Compose (recommended)
 - PostgreSQL (if not using Docker)
@@ -131,56 +130,12 @@ npm install
 npm start
 ```
 
-## 🏗️ Project Structure
-
-```
-wareflow/
-├── .github/              # GitHub Actions workflows
-├── docker/               # Docker configuration files
-├── server/               # Backend Express.js application
-│   ├── prisma/           # Database schema and migrations
-│   ├── src/
-│   │   ├── controllers/  # Request handlers
-│   │   ├── middlewares/  # Express middlewares
-│   │   ├── models/       # Data models
-│   │   ├── routes/       # API routes
-│   │   ├── services/     # Business logic
-│   │   └── utils/        # Helper functions
-│   └── tests/            # Backend tests
-├── web/                  # Frontend React application
-│   ├── public/           # Static assets
-│   ├── src/
-│   │   ├── components/   # React components
-│   │   ├── hooks/        # Custom React hooks
-│   │   ├── pages/        # Page components
-│   │   ├── services/     # API integration
-│   │   ├── store/        # Redux store
-│   │   └── utils/        # Helper functions
-│   └── tests/            # Frontend tests
-└── docker-compose.yml    # Docker Compose configuration
-```
-
 ## 📝 API Documentation
 
 Our API follows RESTful principles and is fully documented. Once the server is running, you can access the API documentation at:
 
 ```
 http://localhost:4000/api-docs
-```
-
-## 🧪 Testing
-
-```bash
-# Run backend tests
-cd server
-npm test
-
-# Run frontend tests
-cd web
-npm test
-
-# Run e2e tests
-npm run test:e2e
 ```
 
 ## 🔄 Continuous Integration
@@ -215,9 +170,9 @@ Please ensure your code adheres to our coding standards and includes appropriate
 
 ## 👥 Meet the Team
 
-- **Achraf El Ghazi** - Backend Development, API Integration
-- **Ikram Ghala** - Frontend Development, Backend Support
-- **Marwa Errahmani** - Database Design and Implementation
+- **Achraf El Ghazi** - 
+- **Ikram Ghala** - 
+- **Marwa Errahmani** -
 
 ## 📄 License
 
@@ -225,7 +180,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-For questions, issues, or feature requests, please use the GitHub Issues or contact the team at support@wareflow.example.com.
+For questions, issues, or feature requests, please use the GitHub Issues or contact me at a.elghazi@aui.ma
 
 ---
 
