@@ -178,8 +178,6 @@ Please ensure your code adheres to our coding standards and includes appropriate
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-```
-
 ## 📞 Support
 
 For questions, issues, or feature requests, please use the GitHub Issues or contact me at a.elghazi@aui.ma
