@@ -1,18 +1,16 @@
-# 🏢 Warehouse Management System (WMS)
+# 🏢 Warehouse Management System (WareFlow)
 
-[![GitHub Actions](https://img.shields.io/github/workflow/status/your-username/wareflow/CI)](https://github.com/your-username/wareflow/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://www.docker.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.0-blue)](https://reactjs.org/)
 [![Express](https://img.shields.io/badge/Express-4.18-green)](https://expressjs.com/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14-blue)](https://www.postgresql.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue)](https://www.postgresql.org/)
 
 ## 📦 Overview
 
 The Warehouse Management System (WMS) is a modern full-stack application designed to revolutionize warehouse operations for businesses of all sizes. By leveraging a robust tech stack of React, Express.js, and PostgreSQL, WMS enables companies to track products in real-time, manage inventory with precision, and automate critical workflows.
 
-![WMS Dashboard Preview](https://via.placeholder.com/800x400?text=WMS+Dashboard+Preview)
 
 ### Why Choose WMS?
 
@@ -72,7 +70,7 @@ The Warehouse Management System (WMS) is a modern full-stack application designe
 
 ### Prerequisites
 
-- Node.js (v16+)
+- Node.js (v20+)
 - npm or yarn
 - Docker and Docker Compose (recommended)
 - PostgreSQL (if not using Docker)
@@ -171,21 +169,17 @@ Please ensure your code adheres to our coding standards and includes appropriate
 
 ## 👥 Meet the Team
 
-- **[Achraf El Ghazi](https://github.com/achrafelghazi)** -
-- **[Ikram Ghala](https://github.com/ikram062)** - 
+- **[Achraf El Ghazi](https://github.com/achrafelghazi)**
+- **[Ikram Ghala](https://github.com/ikram062)**
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-```
-
 ## 📞 Support
 
-For questions, issues, or feature requests, please use the GitHub Issues or contact the team at support@wareflow.example.com.
-
----
+For questions, issues, or feature requests, please use the GitHub Issues or contact me at a.elghazi@aui.ma .
 
 <p align="center">
-  Built with ❤️ by the WMS Team
+  Built with ❤️ (and for a class project) by the WMS Team
 </p>
