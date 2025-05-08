@@ -13,92 +13,305 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  STAFF
+  CLIENT
+  SUPPLIER
+  VENDOR
+  ADMIN
+}
+
 model User {
-  user_id       String    @id @default(uuid())
-  username      String    @unique
-  password_hash String
-  email         String?   @unique
-  phone         String?
-  is_active     Boolean   @default(true)
-  last_login    DateTime?
-  user_type     String //this coiuld be  "staff", "client", "supplier", "vendor" 
-  profile       Profile?  @relation("user_profile")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  userId       String    @id @default(uuid()) @map("user_id")
+  username     String    @unique
+  passwordHash String    @map("password_hash")
+  email        String?   @unique
+  isActive     Boolean   @default(true) @map("is_active")
+  lastLogin    DateTime? @map("last_login")
+  role         UserRole  @default(CLIENT)
+  staff        Staff?
+  client       Client?
+  supplier     Supplier?
+  vendor       Vendor?
+  profile      Profile?  @relation("user_profile")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("users")
 }
 
 model Profile {
-  profile_id   String    @id @default(uuid())
-  user_id      String    @unique
-  user         User      @relation("user_profile", fields: [user_id], references: [user_id])
-  first_name   String?
-  last_name    String?
-  company_name String?
-  addresses    Address[] @relation("profile_addresses")
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-}
+  profileId String   @id @default(uuid()) @map("profile_id")
+  userId    String   @unique @map("user_id")
+  user      User     @relation("user_profile", fields: [userId], references: [userId])
+  firstName String?  @map("first_name")
+  lastName  String?  @map("last_name")
+  phone     String?
+  bio       String?
+  avatarUrl String?  @map("avatar_url")
+  language  String   @default("en")
+  timezone  String   @default("UTC")
+  address   Address?
+  companyId String?  @map("company_id")
+  company   Company? @relation(fields: [companyId], references: [companyId])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-model Address {
-  address_id     String   @id @default(uuid())
-  profile_id     String
-  profile        Profile  @relation("profile_addresses", fields: [profile_id], references: [profile_id])
-  street_address String?
-  city           String
-  state          String?
-  postal_code    String?
-  country        String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-}
-
-model Job {
-  job_code        String   @id @default(uuid())
-  job_description String
-  job_charge_hour Int      @default(0)
-  staff           Staff[]  @relation("staff_job")
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  @@map("profiles")
 }
 
 model Staff {
-  staff_id          String     @id @default(uuid())
-  job_code          String
-  job               Job        @relation("staff_job", fields: [job_code], references: [job_code])
-  first_name        String
-  last_name         String
-  warehouse_managed Warehouse? @relation("warehouse_manager")
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
+  staffId          String                 @id @default(uuid()) @map("staff_id")
+  jobCode          String                 @map("job_code")
+  job              Job                    @relation("staff_job", fields: [jobCode], references: [jobCode])
+  firstName        String                 @map("first_name")
+  lastName         String                 @map("last_name")
+  hireDate         DateTime               @default(now()) @map("hire_date")
+  userId           String                 @unique @map("user_id")
+  user             User                   @relation(fields: [userId], references: [userId])
+  warehouseManaged Warehouse?             @relation("warehouse_manager")
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+  transactions     InventoryTransaction[]
+
+  @@map("staff")
+}
+
+model Client {
+  clientId      String        @id @default(uuid()) @map("client_id")
+  userId        String        @unique @map("user_id")
+  user          User          @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  creditLimit   Float?        @map("credit_limit")
+  creditRating  String?       @map("credit_rating")
+  accountStatus String        @default("active") @map("account_status")
+  companyId     String?       @map("company_id")
+  company       Company?      @relation(fields: [companyId], references: [companyId])
+  products      Product[]
+  clientOrders  ClientOrder[]
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  @@map("clients")
+}
+
+model Supplier {
+  supplierId     String          @id @default(uuid()) @map("supplier_id")
+  companyId      String          @map("company_id")
+  company        Company         @relation(fields: [companyId], references: [companyId])
+  userId         String          @unique @map("user_id")
+  user           User            @relation(fields: [userId], references: [userId])
+  vendors        Vendor[]
+  supplierOrders SupplierOrder[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@map("suppliers")
+}
+
+model Vendor {
+  vendorId       String          @id @default(uuid()) @map("vendor_id")
+  userId         String          @unique @map("user_id")
+  user           User            @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  supplierId     String?         @map("supplier_id")
+  supplier       Supplier?       @relation(fields: [supplierId], references: [supplierId])
+  position       String?
+  clientOrders   ClientOrder[]
+  supplierOrders SupplierOrder[]
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+
+  @@map("vendors")
+}
+
+model Address {
+  addressId     String   @id @default(uuid()) @map("address_id")
+  profileId     String   @unique @map("profile_id")
+  profile       Profile  @relation(fields: [profileId], references: [profileId])
+  streetAddress String?  @map("street_address")
+  city          String
+  state         String?
+  postalCode    String?  @map("postal_code")
+  country       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("addresses")
+}
+
+model Job {
+  jobCode        String   @id @default(uuid()) @map("job_code")
+  jobDescription String   @map("job_description")
+  jobChargeHour  Int      @default(0) @map("job_charge_hour")
+  staff          Staff[]  @relation("staff_job")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("jobs")
 }
 
 model Warehouse {
-  warehouse_id   String    @id @default(uuid())
-  warehouse_name String
-  manager_id     String?   @unique
-  manager        Staff?    @relation("warehouse_manager", fields: [manager_id], references: [staff_id])
-  Products       Product[] @relation("products_in_warehouse")
+  warehouseId   String                 @id @default(uuid()) @map("warehouse_id")
+  warehouseName String                 @map("warehouse_name")
+  managerId     String?                @unique @map("manager_id")
+  manager       Staff?                 @relation("warehouse_manager", fields: [managerId], references: [staffId])
+  products      Product[]              @relation("products_in_warehouse")
+  transactions  InventoryTransaction[]
+
+  @@map("warehouses")
 }
 
 model Product {
-  product_id   String @id @default(uuid())
-  product_name String
+  productId             String                 @id @default(uuid()) @map("product_id")
+  productName           String                 @map("product_name")
+  warehouseId           String                 @map("warehouse_id")
+  warehouse             Warehouse              @relation("products_in_warehouse", fields: [warehouseId], references: [warehouseId])
+  categoryId            String                 @map("category_id")
+  category              Category               @relation("category_products", fields: [categoryId], references: [categoryId])
+  clientId              String?                @map("client_id")
+  client                Client?                @relation(fields: [clientId], references: [clientId])
+  priceHistory          ProductPriceHistory[]
+  clientOrderItems      ClientOrderItem[]
+  supplierOrderItems    SupplierOrderItem[]
+  inventoryTransactions InventoryTransaction[]
 
-  Warehouse    Warehouse @relation("products_in_warehouse", fields: [warehouse_id], references: [warehouse_id])
-  warehouse_id String
-
-  Category    Category @relation("category_products", fields: [category_id], references: [category_id])
-  category_id String
+  @@map("products")
 }
 
 model Category {
-  category_id          String    @id @default(uuid())
-  category_name        String
-  category_description String?
-  products             Product[] @relation("category_products")
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
+  categoryId          String    @id @default(uuid()) @map("category_id")
+  categoryName        String    @map("category_name")
+  categoryDescription String?   @map("category_description")
+  products            Product[] @relation("category_products")
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  @@map("categories")
 }
+
+model Company {
+  companyId          String     @id @default(uuid()) @map("company_id")
+  companyName        String     @map("company_name")
+  companyDescription String     @map("company_description")
+  taxId              String?    @unique @map("tax_id")
+  industry           String?
+  website            String?
+  foundedDate        DateTime?  @map("founded_date")
+  managerName        String?    @map("manager_name")
+  suppliers          Supplier[]
+  profiles           Profile[]
+  clients            Client[]
+
+  @@map("companies")
+}
+
+
+model ClientOrder {
+  clientOrderId String            @id @default(uuid()) @map("client_order_id")
+  clientId      String            @map("client_id")
+  client        Client            @relation(fields: [clientId], references: [clientId])
+  vendorId      String?           @map("vendor_id")
+  vendor        Vendor?           @relation(fields: [vendorId], references: [vendorId])
+  status        String            @default("pending")
+  orderDate     DateTime          @default(now()) @map("order_date")
+  orderItems    ClientOrderItem[]
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@map("client_orders")
+}
+
+model ClientOrderItem {
+  itemId        String      @id @default(uuid()) @map("item_id")
+  clientOrderId String      @map("client_order_id")
+  clientOrder   ClientOrder @relation(fields: [clientOrderId], references: [clientOrderId])
+  productId     String      @map("product_id")
+  product       Product     @relation(fields: [productId], references: [productId])
+  quantity      Int
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("client_order_items")
+}
+
+model SupplierOrder {
+  supplierOrderId String              @id @default(uuid()) @map("supplier_order_id")
+  supplierId      String              @map("supplier_id")
+  supplier        Supplier            @relation(fields: [supplierId], references: [supplierId])
+  vendorId        String?             @map("vendor_id")
+  vendor          Vendor?             @relation(fields: [vendorId], references: [vendorId])
+  status          String              @default("pending")
+  orderDate       DateTime            @default(now()) @map("order_date")
+  orderItems      SupplierOrderItem[]
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  @@map("supplier_orders")
+}
+
+model SupplierOrderItem {
+  itemId          String        @id @default(uuid()) @map("item_id")
+  supplierOrderId String        @map("supplier_order_id")
+  supplierOrder   SupplierOrder @relation(fields: [supplierOrderId], references: [supplierOrderId])
+  productId       String        @map("product_id")
+  product         Product       @relation(fields: [productId], references: [productId])
+  quantity        Int
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("supplier_order_items")
+}
+
+model ProductPriceHistory {
+  historyId     String   @id @default(uuid()) @map("history_id")
+  productId     String   @map("product_id")
+  product       Product  @relation(fields: [productId], references: [productId])
+  price         Float
+  effectiveDate DateTime @map("effective_date")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("product_price_history")
+}
+
+model InventoryTransaction {
+  transactionId   String    @id @default(uuid()) @map("transaction_id")
+  productId       String    @map("product_id")
+  product         Product   @relation(fields: [productId], references: [productId])
+  warehouseId     String    @map("warehouse_id")
+  warehouse       Warehouse @relation(fields: [warehouseId], references: [warehouseId])
+  staffId         String    @map("staff_id")
+  staff           Staff     @relation(fields: [staffId], references: [staffId])
+  transactionType String    @map("transaction_type") // "receive", "ship", "adjust", "transfer"
+  quantity        Int
+  transactionDate DateTime  @default(now()) @map("transaction_date")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("inventory_transactions")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // these two models are here for documentation purposes
 // and are not used in the actual database
