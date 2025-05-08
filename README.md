@@ -9,10 +9,10 @@
 
 ## 📦 Overview
 
-The Warehouse Management System (WMS) is a modern full-stack application designed to revolutionize warehouse operations for businesses of all sizes. By leveraging a robust tech stack of React, Express.js, and PostgreSQL, WMS enables companies to track products in real-time, manage inventory with precision, and automate critical workflows.
+WareFlow is a modern full-stack application designed to revolutionize warehouse operations for businesses of all sizes. By leveraging a robust tech stack of React, Express.js, and PostgreSQL, WMS enables companies to track products in real-time, manage inventory with precision, and automate critical workflows.
 
 
-### Why Choose WMS?
+### Why Choose WareFlow?
 
 - **Real-time visibility** into warehouse operations
 - **Reduced manual errors** through automation
@@ -70,7 +70,7 @@ The Warehouse Management System (WMS) is a modern full-stack application designe
 
 ### Prerequisites
 
-- Node.js (v20+)
+- Node.js (v22+)
 - npm or yarn
 - Docker and Docker Compose (recommended)
 - PostgreSQL (if not using Docker)
