@@ -281,7 +281,7 @@ model InventoryTransaction {
   warehouse       Warehouse @relation(fields: [warehouseId], references: [warehouseId])
   staffId         String    @map("staff_id")
   staff           Staff     @relation(fields: [staffId], references: [staffId])
-  transactionType String    @map("transaction_type") // "receive", "ship", "adjust", "transfer"
+  transactionType String    @map("transaction_type") //this could be "receive", "ship", "adjust", "transfer"
   quantity        Int
   transactionDate DateTime  @default(now()) @map("transaction_date")
   createdAt       DateTime  @default(now())
