@@ -4,14 +4,12 @@ import { logger } from './utils/logger';
 
 // this script is not needed anymore, it was generated to setup the seeders
 
-
 /**
  * Creates the necessary directory structure for seeders data files
  */
 const setupDirectories = () => {
   const dataDir = path.join(__dirname, 'data');
 
-  // Create data directory if it doesn't exist
   if (!fs.existsSync(dataDir)) {
     logger.info('Creating data directory...');
     fs.mkdirSync(dataDir, { recursive: true });
@@ -77,7 +75,6 @@ const createDataFiles = (dataDir: string) => {
     },
   ];
 
-  // Companies data
   const companiesData = [
     {
       companyName: 'Tech Solutions Inc',
@@ -110,7 +107,6 @@ const createDataFiles = (dataDir: string) => {
     },
   ];
 
-  // Jobs data
   const jobsData = [
     {
       jobCode: 'MGR001',
@@ -129,7 +125,6 @@ const createDataFiles = (dataDir: string) => {
     },
   ];
 
-  // Staff data
   const staffData = [
     {
       username: 'staff_user1',
@@ -147,7 +142,6 @@ const createDataFiles = (dataDir: string) => {
     },
   ];
 
-  // Warehouses data
   const warehousesData = [
     {
       warehouseName: 'Main Distribution Center',
@@ -163,7 +157,6 @@ const createDataFiles = (dataDir: string) => {
     },
   ];
 
-  // Categories data
   const categoriesData = [
     {
       categoryName: 'Electronics',
@@ -188,7 +181,6 @@ const createDataFiles = (dataDir: string) => {
     },
   ];
 
-  // Products data
   const productsData = [
     {
       productName: 'Laptop Pro X5',
@@ -216,7 +208,6 @@ const createDataFiles = (dataDir: string) => {
     },
   ];
 
-  // Profiles data
   const profilesData = [
     {
       username: 'admin_user',
@@ -239,7 +230,6 @@ const createDataFiles = (dataDir: string) => {
     },
   ];
 
-  // Clients data
   const clientsData = [
     {
       username: 'client_user1',
@@ -257,7 +247,6 @@ const createDataFiles = (dataDir: string) => {
     },
   ];
 
-  // Create each file
   const dataFiles = {
     'users.json': usersData,
     'companies.json': companiesData,
@@ -273,7 +262,6 @@ const createDataFiles = (dataDir: string) => {
   for (const [filename, data] of Object.entries(dataFiles)) {
     const filePath = path.join(dataDir, filename);
 
-    // Write the file if it doesn't exist
     if (!fs.existsSync(filePath)) {
       logger.info(`Creating data file: ${filename}`);
       fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
@@ -283,9 +271,6 @@ const createDataFiles = (dataDir: string) => {
   }
 };
 
-/**
- * Main setup function
- */
 const setup = () => {
   logger.info('Setting up seed data files...');
 
@@ -301,5 +286,4 @@ const setup = () => {
   }
 };
 
-// Run the setup
 setup();
