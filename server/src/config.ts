@@ -8,7 +8,7 @@ const config = {
   env: ENV,
   isDev: ENV === 'development',
   isProd: ENV === 'production',
-  port: process.env.PORT || 5000,
+  port: process.env.PORT,
   host:
     ENV === 'development'
       ? 'http://localhost'
