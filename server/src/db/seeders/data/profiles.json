@@ -1,0 +1,70 @@
+[
+  {
+    "username": "admin_user",
+    "firstName": "Admin",
+    "lastName": "User",
+    "phone": "555-1234-5678",
+    "bio": "System administrator with over 10 years of experience",
+    "avatarUrl": "https://example.com/avatars/admin.jpg",
+    "language": "en",
+    "timezone": "America/New_York",
+    "companyName": "Tech Solutions Inc",
+    "address": {
+      "streetAddress": "123 Tech Blvd",
+      "city": "Boston",
+      "state": "MA",
+      "postalCode": "02108",
+      "country": "USA"
+    }
+  },
+  {
+    "username": "staff_user1",
+    "firstName": "Michael",
+    "lastName": "Johnson",
+    "phone": "555-2345-6789",
+    "bio": "Warehouse manager specialized in logistics optimization",
+    "language": "en",
+    "timezone": "America/Chicago",
+    "companyName": "Tech Solutions Inc",
+    "address": {
+      "streetAddress": "456 Warehouse Ave",
+      "city": "Chicago",
+      "state": "IL",
+      "postalCode": "60601",
+      "country": "USA"
+    }
+  },
+  {
+    "username": "client_user1",
+    "firstName": "Jessica",
+    "lastName": "Brown",
+    "phone": "555-3456-7890",
+    "bio": "IT Procurement Manager for a growing enterprise",
+    "language": "en",
+    "timezone": "America/Los_Angeles",
+    "companyName": "Global Manufacturing Ltd",
+    "address": {
+      "streetAddress": "789 Client Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "postalCode": "94105",
+      "country": "USA"
+    }
+  },
+  {
+    "username": "supplier_user1",
+    "firstName": "David",
+    "lastName": "Wilson",
+    "phone": "555-4567-8901",
+    "bio": "Sales representative for wholesale supplies",
+    "language": "en",
+    "timezone": "Europe/London",
+    "companyName": "Acme Supplies",
+    "address": {
+      "streetAddress": "101 Supply Road",
+      "city": "London",
+      "postalCode": "EC1A 1BB",
+      "country": "UK"
+    }
+  }
+]

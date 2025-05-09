@@ -1,0 +1,16 @@
+[
+  {
+    "username": "client_user1",
+    "creditLimit": 10000.00,
+    "creditRating": "A",
+    "accountStatus": "active",
+    "companyName": "Global Manufacturing Ltd"
+  },
+  {
+    "username": "client_user2",
+    "creditLimit": 5000.00,
+    "creditRating": "B",
+    "accountStatus": "active",
+    "companyName": "Express Logistics"
+  }
+]

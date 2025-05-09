@@ -1,0 +1,16 @@
+[
+  {
+    "username": "staff_user1",
+    "firstName": "Michael",
+    "lastName": "Johnson",
+    "hireDate": "2020-03-15",
+    "jobCode": "MGR001"
+  },
+  {
+    "username": "staff_user2",
+    "firstName": "Jennifer",
+    "lastName": "Smith",
+    "hireDate": "2021-07-20",
+    "jobCode": "INV002"
+  }
+]

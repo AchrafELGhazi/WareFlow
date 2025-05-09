@@ -1,0 +1,27 @@
+[
+  {
+    "jobCode": "MGR001",
+    "jobDescription": "Warehouse Manager",
+    "jobChargeHour": 45
+  },
+  {
+    "jobCode": "INV002",
+    "jobDescription": "Inventory Specialist",
+    "jobChargeHour": 30
+  },
+  {
+    "jobCode": "LOG003",
+    "jobDescription": "Logistics Coordinator",
+    "jobChargeHour": 32
+  },
+  {
+    "jobCode": "ADM004",
+    "jobDescription": "Administrative Assistant",
+    "jobChargeHour": 25
+  },
+  {
+    "jobCode": "TEC005",
+    "jobDescription": "Technical Support Specialist",
+    "jobChargeHour": 35
+  }
+]

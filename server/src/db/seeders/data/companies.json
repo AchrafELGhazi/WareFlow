@@ -1,0 +1,38 @@
+[
+  {
+    "companyName": "Tech Solutions Inc",
+    "companyDescription": "Leading provider of enterprise software solutions",
+    "taxId": "TS12345678",
+    "industry": "Technology",
+    "website": "https://techsolutions.example.com",
+    "foundedDate": "2005-06-15",
+    "managerName": "John Smith"
+  },
+  {
+    "companyName": "Global Manufacturing Ltd",
+    "companyDescription": "International manufacturing company specializing in industrial equipment",
+    "taxId": "GM87654321",
+    "industry": "Manufacturing",
+    "website": "https://globalmanufacturing.example.com",
+    "foundedDate": "1998-03-22",
+    "managerName": "Sarah Johnson"
+  },
+  {
+    "companyName": "Acme Supplies",
+    "companyDescription": "Wholesale supplier of office and industrial supplies",
+    "taxId": "AS45678901",
+    "industry": "Wholesale",
+    "website": "https://acmesupplies.example.com",
+    "foundedDate": "2010-11-08",
+    "managerName": "Robert Davis"
+  },
+  {
+    "companyName": "Express Logistics",
+    "companyDescription": "Fast and reliable logistics and delivery services",
+    "taxId": "EL98765432",
+    "industry": "Logistics",
+    "website": "https://expresslogistics.example.com",
+    "foundedDate": "2015-04-30",
+    "managerName": "Emily Wilson"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "categoryName": "Electronics",
+    "categoryDescription": "Consumer and enterprise electronic devices and components"
+  },
+  {
+    "categoryName": "Office Supplies",
+    "categoryDescription": "Supplies and equipment for office environments"
+  },
+  {
+    "categoryName": "Furniture",
+    "categoryDescription": "Office and home furniture items"
+  },
+  {
+    "categoryName": "Industrial Equipment",
+    "categoryDescription": "Heavy machinery and industrial tools"
+  },
+  {
+    "categoryName": "Computer Accessories",
+    "categoryDescription": "Peripherals and accessories for computing devices"
+  }
+]

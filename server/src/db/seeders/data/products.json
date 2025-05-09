@@ -1,0 +1,58 @@
+[
+  {
+    "productName": "Laptop Pro X5",
+    "warehouseName": "Main Distribution Center",
+    "categoryName": "Electronics",
+    "clientUsername": "client_user1",
+    "initialPrice": 1299.99,
+    "quantity": 50
+  },
+  {
+    "productName": "Wireless Mouse M310",
+    "warehouseName": "Main Distribution Center",
+    "categoryName": "Computer Accessories",
+    "clientUsername": null,
+    "initialPrice": 29.99,
+    "quantity": 200
+  },
+  {
+    "productName": "Executive Office Chair",
+    "warehouseName": "East Coast Fulfillment Center",
+    "categoryName": "Furniture",
+    "clientUsername": "client_user2",
+    "initialPrice": 249.99,
+    "quantity": 25
+  },
+  {
+    "productName": "Premium Paper (500 sheets)",
+    "warehouseName": "Main Distribution Center",
+    "categoryName": "Office Supplies",
+    "clientUsername": null,
+    "initialPrice": 12.99,
+    "quantity": 300
+  },
+  {
+    "productName": "Industrial Drill Press",
+    "warehouseName": "West Coast Storage Facility",
+    "categoryName": "Industrial Equipment",
+    "clientUsername": "client_user1",
+    "initialPrice": 599.99,
+    "quantity": 10
+  },
+  {
+    "productName": "27-inch 4K Monitor",
+    "warehouseName": "Main Distribution Center",
+    "categoryName": "Electronics",
+    "clientUsername": null,
+    "initialPrice": 349.99,
+    "quantity": 75
+  },
+  {
+    "productName": "Standing Desk Converter",
+    "warehouseName": "East Coast Fulfillment Center",
+    "categoryName": "Furniture",
+    "clientUsername": null,
+    "initialPrice": 179.99,
+    "quantity": 30
+  }
+]

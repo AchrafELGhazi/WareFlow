@@ -1,0 +1,14 @@
+[
+  {
+    "warehouseName": "Main Distribution Center",
+    "managerUsername": "staff_user1"
+  },
+  {
+    "warehouseName": "East Coast Fulfillment Center",
+    "managerUsername": null
+  },
+  {
+    "warehouseName": "West Coast Storage Facility",
+    "managerUsername": null
+  }
+]

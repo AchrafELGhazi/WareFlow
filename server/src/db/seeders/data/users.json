@@ -1,0 +1,58 @@
+[
+  {
+    "username": "admin_user",
+    "password": "admin1234",
+    "email": "admin@example.com",
+    "isActive": true,
+    "role": "ADMIN"
+  },
+  {
+    "username": "staff_user1",
+    "password": "staff1234",
+    "email": "staff1@example.com",
+    "isActive": true,
+    "role": "STAFF"
+  },
+  {
+    "username": "staff_user2",
+    "password": "staff1234",
+    "email": "staff2@example.com",
+    "isActive": true,
+    "role": "STAFF"
+  },
+  {
+    "username": "client_user1",
+    "password": "client1234",
+    "email": "client1@example.com",
+    "isActive": true,
+    "role": "CLIENT"
+  },
+  {
+    "username": "client_user2",
+    "password": "client1234",
+    "email": "client2@example.com",
+    "isActive": true,
+    "role": "CLIENT"
+  },
+  {
+    "username": "supplier_user1",
+    "password": "supplier1234",
+    "email": "supplier1@example.com",
+    "isActive": true,
+    "role": "SUPPLIER"
+  },
+  {
+    "username": "vendor_user1",
+    "password": "vendor1234",
+    "email": "vendor1@example.com",
+    "isActive": true,
+    "role": "VENDOR"
+  },
+  {
+    "username": "inactive_user",
+    "password": "inactive1234",
+    "email": "inactive@example.com",
+    "isActive": false,
+    "role": "CLIENT"
+  }
+]
