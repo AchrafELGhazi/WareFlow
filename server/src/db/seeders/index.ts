@@ -1,14 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import { logger } from './utils/logger';
-import { seedUsers } from './services/userSeeder';
-import { seedCompanies } from './services/companySeeder';
-import { seedJobs } from './services/jobSeeder';
-import { seedWarehouses } from './services/warehouseSeeder';
-import { seedCategories } from './services/categorySeeder';
-import { seedProducts } from './services/productSeeder';
-import { seedProfiles } from './services/profileSeeder';
-import { seedStaff } from './services/staffSeeder';
-import { seedClients } from './services/clientSeeder';
+import { seedUsers } from './services/user.seeder';
+import { seedCompanies } from './services/company.seeder';
+import { seedJobs } from './services/job.seeder';
+import { seedWarehouses } from './services/warehouse.seeder';
+import { seedCategories } from './services/category.seeder';
+import { seedProducts } from './services/product.seeder';
+import { seedProfiles } from './services/profile.seeder';
+import { seedStaff } from './services/staff.seeder';
+import { seedClients } from './services/client.seeder';
 
 const main = async () => {
   logger.info('Starting database seeding...');
