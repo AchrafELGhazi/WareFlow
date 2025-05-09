@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import authService from '../services/auth.service';
+import { SignupDto, LoginDto } from '../dtos/auth.dto';
 
 class AuthController {
   signup = async (req: Request, res: Response): Promise<void> => {
     try {
-      const { username, password, email } = req.body;
+      const userData: SignupDto = req.body;
 
-      const result = await authService.signup(username, password, email);
+      const result = await authService.signup(userData);
 
       res.status(201).json({
         message: 'User registered successfully',
@@ -33,9 +34,10 @@ class AuthController {
 
   login = async (req: Request, res: Response): Promise<void> => {
     try {
-      const { username, password } = req.body;
+      // The body has already been validated by the middleware
+      const loginData: LoginDto = req.body;
 
-      const result = await authService.login(username, password);
+      const result = await authService.login(loginData);
 
       res.status(200).json({
         message: 'Login successful',

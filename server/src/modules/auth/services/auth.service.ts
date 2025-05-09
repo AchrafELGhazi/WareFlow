@@ -1,11 +1,11 @@
 import { PrismaClient, User, UserRole } from '@prisma/client';
-import bcrypt from 'bcryptjs';
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import { Secret } from 'jsonwebtoken';
+import { SignupDto, LoginDto } from '../dtos/auth.dto';
+import { PasswordUtils } from '../utils/passwordUtils';
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 class AuthService {
@@ -15,11 +15,9 @@ class AuthService {
     this.prisma = new PrismaClient();
   }
 
-  async signup(
-    username: string,
-    password: string,
-    email?: string
-  ): Promise<{ user: any; token: string }> {
+  async signup(data: SignupDto): Promise<{ user: any; token: string }> {
+    const { username, password, email } = data;
+
     const existingUsername = await this.prisma.user.findUnique({
       where: { username },
     });
@@ -38,8 +36,7 @@ class AuthService {
       }
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(password, salt);
+    const passwordHash = await PasswordUtils.hashPassword(password);
 
     const role = email === ADMIN_EMAIL ? UserRole.ADMIN : UserRole.CLIENT;
 
@@ -94,10 +91,9 @@ class AuthService {
     };
   }
 
-  async login(
-    username: string,
-    password: string
-  ): Promise<{ user: any; token: string }> {
+  async login(data: LoginDto): Promise<{ user: any; token: string }> {
+    const { username, password } = data;
+
     const user = await this.prisma.user.findUnique({
       where: { username },
     });
@@ -110,7 +106,11 @@ class AuthService {
       throw new Error('Account is disabled. Please contact support.');
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+    const isPasswordValid = await PasswordUtils.verifyPassword(
+      password,
+      user.passwordHash
+    );
+
     if (!isPasswordValid) {
       throw new Error('Invalid credentials');
     }
@@ -150,7 +150,7 @@ class AuthService {
     };
 
     const options: SignOptions = {
-      expiresIn: '24h',
+      expiresIn:'24h',
     };
 
     return jwt.sign(payload, JWT_SECRET as Secret, options);

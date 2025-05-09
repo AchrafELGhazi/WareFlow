@@ -1,18 +1,22 @@
 import { Router } from 'express';
 import authController from '../controllers/auth.controller';
-import authMiddleware from '../../../middlewares/auth.middleware';
-import { LoginDto, SignupDto } from '../dtos/auth.dto';
-import { validateDto } from '../validators/auth.validator';
+import { SignupSchema, LoginSchema } from '../schemas/auth.schema';
+import { UserRole } from '@prisma/client';
+import { authenticate, validateSchema, verifyRole } from '../../../middlewares';
 
 const authRouter = Router();
 
-authRouter.post('/signup', validateDto(SignupDto), authController.signup);
-authRouter.post('/login', validateDto(LoginDto), authController.login);
+authRouter.post('/signup', validateSchema(SignupSchema), authController.signup);
+authRouter.post('/login', validateSchema(LoginSchema), authController.login);
 authRouter.post('/logout', authController.logout);
+authRouter.get('/me', authenticate, authController.getCurrentUser);
 authRouter.get(
-  '/me',
-  authMiddleware.authenticate,
-  authController.getCurrentUser
+  '/admin-dashboard',
+  authenticate,
+  verifyRole([UserRole.ADMIN]),
+  (req, res) => {
+    res.status(200).json({ message: 'Admin access granted' });
+  }
 );
 
 export default authRouter;
