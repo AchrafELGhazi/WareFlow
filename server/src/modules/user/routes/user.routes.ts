@@ -11,7 +11,7 @@ authRouter.post('/login', validateSchema(LoginSchema), authController.login);
 authRouter.post('/logout', authController.logout);
 authRouter.get('/me', authenticate, authController.getCurrentUser);
 authRouter.get(
-  '/admin-dashboard',
+  '/toggle-role',
   authenticate,
   verifyRole([UserRole.ADMIN]),
   (req, res) => {
