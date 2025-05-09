@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import authService from '../services/auth.service';
-import { SignupDto, LoginDto } from '../dtos/auth.dto';
+import authService from '../services/user.service';
+import { SignupDto, LoginDto } from '../dtos/user.dto';
 
 class AuthController {
   signup = async (req: Request, res: Response): Promise<void> => {
@@ -34,6 +34,7 @@ class AuthController {
 
   login = async (req: Request, res: Response): Promise<void> => {
     try {
+      // The body has already been validated by the middleware
       const loginData: LoginDto = req.body;
 
       const result = await authService.login(loginData);
