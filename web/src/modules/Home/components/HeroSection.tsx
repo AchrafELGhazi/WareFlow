@@ -48,7 +48,6 @@ const HeroSection: React.FC = () => {
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
   const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
-  // Advanced particle effect
   const [particles, setParticles] = useState<
     Array<{
       id: number;
@@ -62,7 +61,6 @@ const HeroSection: React.FC = () => {
   >([]);
 
   useEffect(() => {
-    // Generate dynamic particles with varied colors
     const dynamicParticles = Array.from({ length: 25 }, (_, i) => {
       const colors = ['#22d3ee', '#818cf8', '#a78bfa', '#60a5fa', '#34d399'];
       return {
