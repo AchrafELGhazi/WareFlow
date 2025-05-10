@@ -9,21 +9,21 @@ const testimonials = [
       "This WMS transformed our logistics operations. We've reduced processing time by 40% and virtually eliminated shipping errors.",
     author: 'Sarah Johnson',
     position: 'Operations Director, GlobalTech',
-    image: '/src/assets/images/testimonials/profile1.jpg',
+    // image: '/src/assets/images/testimonials/profile1.jpg',
   },
   {
     quote:
       'The real-time tracking feature has been a game-changer for our clients. They love the transparency and we love the efficiency.',
     author: 'Michael Chen',
     position: 'Logistics Manager, FastShip Inc.',
-    image: '/src/assets/images/testimonials/profile2.jpg',
+    // image: '/src/assets/images/testimonials/profile2.jpg',
   },
   {
     quote:
       'Implementing this system has improved our inventory accuracy from 92% to 99.8%. The ROI was evident within the first quarter.',
     author: 'Aisha Patel',
     position: 'Supply Chain Lead, Retail Solutions',
-    image: '/src/assets/images/testimonials/profile3.jpg',
+    // image: '/src/assets/images/testimonials/profile3.jpg',
   },
 ];
 
@@ -88,7 +88,7 @@ const TestimonialsSection: React.FC = () => {
                     </p>
                     <div className='flex items-center'>
                       <div className='w-14 h-14 rounded-full bg-gray-300 mr-4'>
-                        <img
+                        {/* <img
                           src={testimonial.image}
                           alt={testimonial.author}
                           className='w-full h-full rounded-full object-cover'
@@ -96,7 +96,7 @@ const TestimonialsSection: React.FC = () => {
                             (e.target as HTMLImageElement).src =
                               'https://via.placeholder.com/56';
                           }}
-                        />
+                        /> */}
                       </div>
                       <div>
                         <p className='font-medium text-lg'>
