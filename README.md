@@ -81,7 +81,7 @@ The fastest way to get WMS up and running:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/wareflow.git
+git clone https://github.com/AchrafELGhazi/wareflow.git
 cd wareflow
 
 # Create and configure environment variables
