@@ -1,4 +1,4 @@
-name: Express Building Backend
+name: Wareflow Building Backend
 
 on:
   push:
