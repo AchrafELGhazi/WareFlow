@@ -10,7 +10,6 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Button from '@/shared/components/Button';
 
-// Enhanced statistics with icons
 const dashboardStats = [
   {
     label: 'Active Shipments',

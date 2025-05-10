@@ -1,10 +1,15 @@
-import { Routes, BrowserRouter as Router, Route, Navigate } from 'react-router-dom';
-import Navbar from './shared/Navbar';
+import {
+  Routes,
+  BrowserRouter as Router,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+import Navbar from './layout/Navbar';
 import { Suspense } from 'react';
 import { routes } from './routes';
 
 function App() {
-  const isAuthenticated = false; 
+  const isAuthenticated = false;
 
   return (
     <>
@@ -32,4 +37,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

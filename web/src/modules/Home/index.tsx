@@ -1,12 +1,9 @@
 import React from 'react';
 import HeroSection from './components/HeroSection';
-import Footer from '@/shared/Footer';
+import Footer from '@/layout/Footer';
 import { motion } from 'framer-motion';
 
 const Home: React.FC = () => {
-
-
-
   return (
     <div className={`min-h-screen w-full bg-[#030712] z-0 `}>
       <motion.div
@@ -27,7 +24,6 @@ const Home: React.FC = () => {
       />
       <HeroSection />
 
-     
       <Footer />
     </div>
   );
