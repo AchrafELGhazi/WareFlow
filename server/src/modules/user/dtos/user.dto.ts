@@ -1,13 +1,13 @@
-import { UserRole } from "@prisma/client";
+import { UserRole } from '@prisma/client';
 
 export interface GetUserInfoDto {
   userId: string;
 }
 
-export interface UserInfoResult{
-  firstname: string;
-  lastname: string;
+export interface UserInfoResult {
+  firstName: string;
+  lastName: string;
   role: UserRole | null;
-  company_name: string | null;
+  companyName: string | null;
   phone: string | null;
 }

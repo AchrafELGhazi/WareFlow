@@ -5,6 +5,11 @@ import { authenticate, validateSchema } from '../../../middlewares';
 
 const userRouter = Router();
 
-userRouter.get('/profile/:userId', validateSchema(getUserInfoSchema), userController.getUserInfo);
+userRouter.get(
+  '/profile/:userId',
+  // authenticate,
+  // validateSchema(getUserInfoSchema),
+  userController.getUserInfo
+);
 
 export default userRouter;
