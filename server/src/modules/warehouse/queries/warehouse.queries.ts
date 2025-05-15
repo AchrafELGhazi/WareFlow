@@ -15,6 +15,14 @@ class WarehouseQueries {
       `;
   };
 
+  createWarehouseQuery = (warehouseName: string, managerId: string) => {
+    return this.prisma.$queryRaw`
+      INSERT INTO warehouses (warehouse_id, warehouse_name, manager_id)
+      VALUES (gen_random_uuid(), ${warehouseName}, ${managerId})
+      RETURNING *;
+    `;
+  };
+
   updateWarehouseManagerQuery = (warehouseId: string, managerId: string) => {
     return this.prisma.$queryRaw`
       UPDATE warehouses

@@ -34,6 +34,12 @@ class WarehouseServices {
 
     return null;
   }
+
+  async createWarehouseService(warehouseName: string, managerId: string) : Promise<null>{
+    await WarehouseQueries.createWarehouseQuery(warehouseName, managerId);
+
+    return null;
+  }
 }
 
 export default new WarehouseServices();
