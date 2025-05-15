@@ -15,6 +15,15 @@ class UserService {
     if (Array.isArray(results) && results.length > 0) {
       return results[0] as UserInfoResult;
     }
+    return null;
+  }
+
+  async updateUserRoleService(userId: string, role: string): Promise<UserInfoResult | null> {
+    const results = await UserQueries.updateUserRoleQuery(userId, role);
+
+    if (Array.isArray(results) && results.length > 0) {
+      return results[0] as UserInfoResult;
+    }
 
     return null;
   }

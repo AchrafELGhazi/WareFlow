@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import UserService from '../services/user.service';
+import { Request, Response } from "express";
+import UserService from "../services/user.service";
 
 class UserController {
   getUserInfo = async (req: Request, res: Response): Promise<void> => {
@@ -10,7 +10,7 @@ class UserController {
       if (!user) {
         res.status(404).json({
           success: false,
-          message: 'User not found',
+          message: "User not found",
         });
         return;
       }
@@ -19,10 +19,27 @@ class UserController {
         user,
       });
     } catch (error) {
-      console.error('Error fetching user info:', error);
+      console.error("Error fetching user info:", error);
       res.status(500).json({
         success: false,
-        message: 'Server Error',
+        message: "Server Error",
+      });
+    }
+  };
+
+  updateUserRole = async (req: Request, res: Response): Promise<void> => {
+    const { userId, role } = req.params;
+
+    try {
+      await UserService.updateUserRoleService(userId, role);
+      res.status(200).json({
+        success: true,
+      });
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
       });
     }
   };
