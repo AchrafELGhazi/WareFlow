@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import UserService from "../services/user.service";
 
 class UserController {
+  
   getUserInfo = async (req: Request, res: Response): Promise<void> => {
     const { userId } = req.params;
 
