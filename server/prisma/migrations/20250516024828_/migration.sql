@@ -105,8 +105,6 @@ CREATE TABLE "jobs" (
     "job_code" TEXT NOT NULL,
     "job_description" TEXT NOT NULL,
     "job_charge_hour" INTEGER NOT NULL DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "jobs_pkey" PRIMARY KEY ("job_code")
 );

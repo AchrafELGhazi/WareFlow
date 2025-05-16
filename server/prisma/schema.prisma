@@ -143,8 +143,6 @@ model Job {
   jobDescription String   @map("job_description")
   jobChargeHour  Int      @default(0) @map("job_charge_hour")
   staff          Staff[]  @relation("staff_job")
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
 
   @@map("jobs")
 }
