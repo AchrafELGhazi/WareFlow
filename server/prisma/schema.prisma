@@ -35,7 +35,6 @@ model User {
   vendor       Vendor?
   profile      Profile?  @relation("user_profile")
   createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
 
   @@map("users")
 }
@@ -55,7 +54,6 @@ model Profile {
   companyId String?  @map("company_id")
   company   Company? @relation(fields: [companyId], references: [companyId])
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   @@map("profiles")
 }
@@ -71,7 +69,6 @@ model Staff {
   user             User                   @relation(fields: [userId], references: [userId])
   warehouseManaged Warehouse?             @relation("warehouse_manager")
   createdAt        DateTime               @default(now())
-  updatedAt        DateTime               @updatedAt
   transactions     InventoryTransaction[]
 
   @@map("staff")
@@ -89,7 +86,6 @@ model Client {
   products      Product[]
   clientOrders  ClientOrder[]
   createdAt     DateTime      @default(now()) @map("created_at")
-  updatedAt     DateTime      @updatedAt @map("updated_at")
 
   @@map("clients")
 }
@@ -103,7 +99,6 @@ model Supplier {
   vendors        Vendor[]
   supplierOrders SupplierOrder[]
   createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
 
   @@map("suppliers")
 }
@@ -118,7 +113,6 @@ model Vendor {
   clientOrders   ClientOrder[]
   supplierOrders SupplierOrder[]
   createdAt      DateTime        @default(now()) @map("created_at")
-  updatedAt      DateTime        @updatedAt @map("updated_at")
 
   @@map("vendors")
 }
@@ -132,8 +126,6 @@ model Address {
   state         String?
   postalCode    String?  @map("postal_code")
   country       String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
 
   @@map("addresses")
 }
@@ -143,8 +135,6 @@ model Job {
   jobDescription String   @map("job_description")
   jobChargeHour  Int      @default(0) @map("job_charge_hour")
   staff          Staff[]  @relation("staff_job")
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
 
   @@map("jobs")
 }
@@ -182,8 +172,6 @@ model Category {
   categoryName        String    @map("category_name")
   categoryDescription String?   @map("category_description")
   products            Product[] @relation("category_products")
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
 
   @@map("categories")
 }
@@ -215,7 +203,6 @@ model ClientOrder {
   orderDate     DateTime          @default(now()) @map("order_date")
   orderItems    ClientOrderItem[]
   createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt
 
   @@map("client_orders")
 }
@@ -228,7 +215,6 @@ model ClientOrderItem {
   product       Product     @relation(fields: [productId], references: [productId])
   quantity      Int
   createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
 
   @@map("client_order_items")
 }
@@ -243,7 +229,6 @@ model SupplierOrder {
   orderDate       DateTime            @default(now()) @map("order_date")
   orderItems      SupplierOrderItem[]
   createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
 
   @@map("supplier_orders")
 }
@@ -256,7 +241,6 @@ model SupplierOrderItem {
   product         Product       @relation(fields: [productId], references: [productId])
   quantity        Int
   createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
 
   @@map("supplier_order_items")
 }
@@ -268,7 +252,6 @@ model ProductPriceHistory {
   price         Float
   effectiveDate DateTime @map("effective_date")
   createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
 
   @@map("product_price_history")
 }
@@ -285,7 +268,6 @@ model InventoryTransaction {
   quantity        Int
   transactionDate DateTime  @default(now()) @map("transaction_date")
   createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
 
   @@map("inventory_transactions")
 }

@@ -1,10 +1,13 @@
-export interface SignupDto {
-  username: string;
-  password: string;
-  email?: string;
+import { UserRole } from '@prisma/client';
+
+export interface GetUserInfoDto {
+  userId: string;
 }
 
-export interface LoginDto {
-  username: string;
-  password: string;
+export interface UserInfoResult {
+  firstName: string;
+  lastName: string;
+  role: UserRole | null;
+  companyName: string | null;
+  phone: string | null;
 }

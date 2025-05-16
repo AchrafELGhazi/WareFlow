@@ -1,102 +1,49 @@
-import { Request, Response } from 'express';
-import authService from '../services/user.service';
-import { SignupDto, LoginDto } from '../dtos/user.dto';
+import { Request, Response } from "express";
+import UserService from "../services/user.service";
 
-class AuthController {
-  signup = async (req: Request, res: Response): Promise<void> => {
+class UserController {
+  
+  getUserInfo = async (req: Request, res: Response): Promise<void> => {
+    const { userId } = req.params;
+
     try {
-      const userData: SignupDto = req.body;
-
-      const result = await authService.signup(userData);
-
-      res.status(201).json({
-        message: 'User registered successfully',
-        user: result.user,
-        token: result.token,
-      });
-    } catch (error) {
-      console.error(
-        `Registration error: ${
-          error instanceof Error ? error.message : 'Unknown error'
-        }`
-      );
-
-      if (error instanceof Error && error.message.includes('already')) {
-        res.status(409).json({ message: error.message });
-        return;
-      }
-
-      res
-        .status(500)
-        .json({ message: 'Internal server error during registration' });
-    }
-  };
-
-  login = async (req: Request, res: Response): Promise<void> => {
-    try {
-      // The body has already been validated by the middleware
-      const loginData: LoginDto = req.body;
-
-      const result = await authService.login(loginData);
-
-      res.status(200).json({
-        message: 'Login successful',
-        user: result.user,
-        token: result.token,
-      });
-    } catch (error) {
-      console.error(
-        `Login error: ${
-          error instanceof Error ? error.message : 'Unknown error'
-        }`
-      );
-
-      if (error instanceof Error && error.message.includes('credentials')) {
-        res.status(401).json({ message: 'Invalid username or password' });
-        return;
-      }
-
-      if (error instanceof Error && error.message.includes('disabled')) {
-        res.status(403).json({ message: error.message });
-        return;
-      }
-
-      res.status(500).json({ message: 'Internal server error during login' });
-    }
-  };
-
-  logout = async (req: Request, res: Response): Promise<void> => {
-    try {
-      res.status(200).json({ message: 'Logout successful' });
-    } catch (error) {
-      console.error(
-        `Logout error: ${
-          error instanceof Error ? error.message : 'Unknown error'
-        }`
-      );
-      res.status(500).json({ message: 'Internal server error during logout' });
-    }
-  };
-
-  getCurrentUser = async (req: Request, res: Response): Promise<void> => {
-    try {
-      const user = req.user;
-
+      const user = await UserService.getUserInfoService(userId);
       if (!user) {
-        res.status(401).json({ message: 'Not authenticated' });
+        res.status(404).json({
+          success: false,
+          message: "User not found",
+        });
         return;
       }
-
-      res.status(200).json({ user });
+      res.status(200).json({
+        success: true,
+        user,
+      });
     } catch (error) {
-      console.error(
-        `Get current user error: ${
-          error instanceof Error ? error.message : 'Unknown error'
-        }`
-      );
-      res.status(500).json({ message: 'Internal server error' });
+      console.error("Error fetching user info:", error);
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+      });
+    }
+  };
+
+  updateUserRole = async (req: Request, res: Response): Promise<void> => {
+    const { userId, role } = req.params;
+
+    try {
+      await UserService.updateUserRoleService(userId, role);
+      res.status(200).json({
+        success: true,
+      });
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+      });
     }
   };
 }
 
-export default new AuthController();
+export default new UserController();

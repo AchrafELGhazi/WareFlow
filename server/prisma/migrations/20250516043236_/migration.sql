@@ -11,7 +11,6 @@ CREATE TABLE "users" (
     "last_login" TIMESTAMP(3),
     "role" "UserRole" NOT NULL DEFAULT 'CLIENT',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("user_id")
 );
@@ -29,7 +28,6 @@ CREATE TABLE "profiles" (
     "timezone" TEXT NOT NULL DEFAULT 'UTC',
     "company_id" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "profiles_pkey" PRIMARY KEY ("profile_id")
 );
@@ -43,7 +41,6 @@ CREATE TABLE "staff" (
     "hire_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "user_id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "staff_pkey" PRIMARY KEY ("staff_id")
 );
@@ -57,7 +54,6 @@ CREATE TABLE "clients" (
     "account_status" TEXT NOT NULL DEFAULT 'active',
     "company_id" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "clients_pkey" PRIMARY KEY ("client_id")
 );
@@ -68,7 +64,6 @@ CREATE TABLE "suppliers" (
     "company_id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "suppliers_pkey" PRIMARY KEY ("supplier_id")
 );
@@ -80,7 +75,6 @@ CREATE TABLE "vendors" (
     "supplier_id" TEXT,
     "position" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "vendors_pkey" PRIMARY KEY ("vendor_id")
 );
@@ -94,8 +88,6 @@ CREATE TABLE "addresses" (
     "state" TEXT,
     "postal_code" TEXT,
     "country" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "addresses_pkey" PRIMARY KEY ("address_id")
 );
@@ -105,8 +97,6 @@ CREATE TABLE "jobs" (
     "job_code" TEXT NOT NULL,
     "job_description" TEXT NOT NULL,
     "job_charge_hour" INTEGER NOT NULL DEFAULT 0,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "jobs_pkey" PRIMARY KEY ("job_code")
 );
@@ -136,8 +126,6 @@ CREATE TABLE "categories" (
     "category_id" TEXT NOT NULL,
     "category_name" TEXT NOT NULL,
     "category_description" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "categories_pkey" PRIMARY KEY ("category_id")
 );
@@ -164,7 +152,6 @@ CREATE TABLE "client_orders" (
     "status" TEXT NOT NULL DEFAULT 'pending',
     "order_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "client_orders_pkey" PRIMARY KEY ("client_order_id")
 );
@@ -176,7 +163,6 @@ CREATE TABLE "client_order_items" (
     "product_id" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "client_order_items_pkey" PRIMARY KEY ("item_id")
 );
@@ -189,7 +175,6 @@ CREATE TABLE "supplier_orders" (
     "status" TEXT NOT NULL DEFAULT 'pending',
     "order_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "supplier_orders_pkey" PRIMARY KEY ("supplier_order_id")
 );
@@ -201,7 +186,6 @@ CREATE TABLE "supplier_order_items" (
     "product_id" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "supplier_order_items_pkey" PRIMARY KEY ("item_id")
 );
@@ -213,7 +197,6 @@ CREATE TABLE "product_price_history" (
     "price" DOUBLE PRECISION NOT NULL,
     "effective_date" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "product_price_history_pkey" PRIMARY KEY ("history_id")
 );
@@ -228,7 +211,6 @@ CREATE TABLE "inventory_transactions" (
     "quantity" INTEGER NOT NULL,
     "transaction_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "inventory_transactions_pkey" PRIMARY KEY ("transaction_id")
 );
