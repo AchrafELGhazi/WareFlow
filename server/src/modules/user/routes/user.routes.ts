@@ -7,7 +7,7 @@ const userRouter = Router();
 
 userRouter.get(
   "/:userId",
-  //   validateSchema(getUserInfoSchema),
+    validateSchema(getUserInfoSchema),
   userController.getUserInfo
 );
 
