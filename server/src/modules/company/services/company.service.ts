@@ -13,7 +13,7 @@ class CompanyServices {
     return null;
   }
 
-  async updateCompanyManagerService(
+  async updateCompanyService(
     companyId: string,
     companyName: string,
     companyDescription: string,
@@ -23,7 +23,7 @@ class CompanyServices {
     foundedDate: string,
     managerName: string
   ): Promise<CompanyInfoResult | null> {
-    const results = await CompanyQueries.updateCompanyManagerQuery(
+    const results = await CompanyQueries.updateCompanyQuery(
       companyId,
       companyName,
       companyDescription,

@@ -39,7 +39,7 @@ class CompanyQueries {
     `;
   };
 
-  updateCompanyManagerQuery = (
+  updateCompanyQuery = (
     companyId: string,
     companyName: string,
     companyDescription: string,

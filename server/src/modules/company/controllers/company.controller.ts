@@ -94,7 +94,7 @@ class CompanyController {
     }
   };
 
-  updateCompanyManagerController = async (
+  updateCompanyController = async (
     req: Request,
     res: Response
   ): Promise<void> => {
@@ -110,7 +110,7 @@ class CompanyController {
     } = req.body;
 
     try {
-      await CompanyServices.updateCompanyManagerService(
+      await CompanyServices.updateCompanyService(
         companyId,
         companyName,
         companyDescription,

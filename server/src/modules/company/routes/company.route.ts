@@ -5,7 +5,7 @@ const companyRouter = Router()
 
 companyRouter.post('/', CompanyController.createCompanyController)
 companyRouter.get('/:companyId', CompanyController.getCompanyInfoController)
-companyRouter.patch("/:companyId", CompanyController.updateCompanyManagerController)
+companyRouter.patch("/:companyId", CompanyController.updateCompanyController)
 companyRouter.delete("/:companyId", CompanyController.deleteCompanyController)
 
 export default companyRouter;
