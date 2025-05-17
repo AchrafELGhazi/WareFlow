@@ -46,7 +46,7 @@ const MePage: React.FC = () => {
             : new Date().toLocaleDateString(),
           permissions: ['read:all', 'write:own', 'manage:inventory'],
         });
-      } catch (error) {
+      } catch (error) { 
         console.error('Error parsing user from localStorage:', error);
       }
     }

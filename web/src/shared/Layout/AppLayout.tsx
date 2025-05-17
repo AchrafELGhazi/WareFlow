@@ -16,7 +16,6 @@ const AppLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
-  // Close sidebar when route changes on mobile
   useEffect(() => {
     setSidebarOpen(false);
   }, [location.pathname]);
@@ -184,7 +183,7 @@ const AppLayout: React.FC = () => {
                         Your Profile
                       </Link>
                       <Link
-                        to='/settings'
+                        to='/app/settings'
                         className='block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                       >
                         Settings

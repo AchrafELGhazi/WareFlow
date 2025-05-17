@@ -6,7 +6,6 @@ const SignUpPage: React.FC = () => {
   return (
     <AuthLayout
       title='Create a new account'
-      subtitle='Already have an account?'
       linkText='Sign in here'
       linkUrl='/auth/signin'
     >

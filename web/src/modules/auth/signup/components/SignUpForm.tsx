@@ -32,7 +32,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
 
   const onSubmit = async (data: SignUpFormValues) => {
     if (data.password !== data.confirmPassword) {
-      return; // Form validation should catch this
+      return;
     }
 
     try {
@@ -42,7 +42,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
         password: data.password,
       }).unwrap();
 
-      // Set user credentials in Redux store
       dispatch(
         setCredentials({
           user: result.user,
@@ -50,15 +49,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
         })
       );
 
-      // Call the onSuccess callback if provided
       if (onSuccess) {
         onSuccess();
       }
 
-      // Redirect to dashboard after successful signup
-      navigate('/dashboard', { replace: true });
+      navigate('/app/dashboard', { replace: true });
     } catch (err) {
-      // Error is handled by RTK Query
       console.error('Failed to sign up', err);
     }
   };
@@ -95,7 +91,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSuccess }) => {
           htmlFor='email'
           className='block text-sm font-medium text-gray-700'
         >
-          Email address (optional)
+          Email address
         </label>
         <div className='mt-1'>
           <input
