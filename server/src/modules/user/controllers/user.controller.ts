@@ -2,7 +2,21 @@ import { Request, Response } from "express";
 import UserService from "../services/user.service";
 
 class UserController {
-  
+  getAllUsers = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const users = await UserService.getAllUsersService();
+      res.status(200).json({
+        success: true,
+        users,
+      });
+    } catch (error) {
+      console.error('Error fetching all users:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Server Error',
+      });
+    }
+  };
   getUserInfo = async (req: Request, res: Response): Promise<void> => {
     const { userId } = req.params;
 
@@ -11,7 +25,7 @@ class UserController {
       if (!user) {
         res.status(404).json({
           success: false,
-          message: "User not found",
+          message: 'User not found',
         });
         return;
       }
@@ -20,10 +34,10 @@ class UserController {
         user,
       });
     } catch (error) {
-      console.error("Error fetching user info:", error);
+      console.error('Error fetching user info:', error);
       res.status(500).json({
         success: false,
-        message: "Server Error",
+        message: 'Server Error',
       });
     }
   };
@@ -37,10 +51,10 @@ class UserController {
         success: true,
       });
     } catch (error) {
-      console.error("Error fetching user info:", error);
+      console.error('Error fetching user info:', error);
       res.status(500).json({
         success: false,
-        message: "Server Error",
+        message: 'Server Error',
       });
     }
   };

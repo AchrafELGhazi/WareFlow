@@ -24,6 +24,38 @@ class UserQueries {
       WHERE user_id = ${userId}
     `;
   };
+
+  getAllUsersQuery = () => {
+    return this.prisma.$queryRaw`
+    SELECT 
+      u.user_id AS "userId",
+      u.username,
+      u.email,
+      u.is_active AS "isActive",
+      u.last_login AS "lastLogin",
+      u.role,
+      p.profile_id AS "profileId",
+      p.first_name AS "firstName",
+      p.last_name AS "lastName",
+      p.phone,
+      p.bio,
+      p.avatar_url AS "avatarUrl",
+      p.language,
+      p.timezone,
+      c.company_id AS "companyId",
+      c.company_name AS "companyName",
+      c.company_description AS "companyDescription",
+      c.tax_id AS "taxId",
+      c.industry,
+      c.website,
+      c.founded_date AS "foundedDate",
+      c.manager_name AS "managerName"
+    FROM users u
+    LEFT JOIN profiles p ON u.user_id = p.user_id
+    LEFT JOIN companies c ON p.company_id = c.company_id
+    ORDER BY u.username
+  `;
+  };
 }
 
 export default new UserQueries();

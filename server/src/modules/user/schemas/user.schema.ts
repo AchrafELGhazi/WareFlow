@@ -9,4 +9,22 @@ export const getUserInfoSchema = object({
   })
 })
 
+
+export const getAllUsersSchema = object({
+  // query: object({
+  //   page: string()
+  //     .optional()
+  //     .transform(val => (val ? parseInt(val) : 1)),
+  //   limit: string()
+  //     .optional()
+  //     .transform(val => (val ? parseInt(val) : 25)),
+  //   role: string().optional(),
+  //   isActive: string()
+  //     .optional()
+  //     .transform(val => val === 'true'),
+  //   search: string().optional(),
+  // }),
+});
+
+export type GetAllUsersInput = z.infer<typeof getAllUsersSchema>;
 export type SignupInput = z.infer<typeof getUserInfoSchema>;

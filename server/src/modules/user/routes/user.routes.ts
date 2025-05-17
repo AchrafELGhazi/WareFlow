@@ -1,16 +1,15 @@
-import { Router } from "express";
-import userController from "../controllers/user.controller";
-import { getUserInfoSchema } from "../schemas/user.schema";
-import { authenticate, validateSchema } from "../../../middlewares";
+import { Router } from 'express';
+import userController from '../controllers/user.controller';
+import { getUserInfoSchema } from '../schemas/user.schema';
+import { authenticate, validateSchema } from '../../../middlewares';
 
 const userRouter = Router();
-
+userRouter.get('/', userController.getAllUsers);
 userRouter.get(
-  "/:userId",
-    validateSchema(getUserInfoSchema),
+  '/:userId',
+  validateSchema(getUserInfoSchema),
   userController.getUserInfo
 );
 
-userRouter.patch("/:userId/:role", userController.updateUserRole)
-
+userRouter.patch('/:userId/:role', userController.updateUserRole);
 export default userRouter;
