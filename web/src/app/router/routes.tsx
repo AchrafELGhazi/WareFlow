@@ -1,6 +1,7 @@
 import CompaniesPage from '@/modules/companies/pages/CompaniesPage';
 import MePage from '@/modules/me/pages/MePage';
 import Users from '@/modules/users/pages/UsersPage';
+import WarehousesPage from '@/modules/warehouses/pages/WarehousesPage';
 import { RouteObject } from 'react-router-dom';
 
 /**
@@ -25,6 +26,10 @@ const routes: RouteObject[] = [
   {
     path: 'me',
     element: <MePage />,
+  },
+  {
+    path: 'warehouses',
+    element: <WarehousesPage />,
   },
   {
     path: 'settings',
