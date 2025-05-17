@@ -28,7 +28,7 @@ export const authenticate = async (
 ): Promise<void> => {
   try {
     const authHeader = req.headers.authorization;
-    const SECRET_KEY = "sk_test_fake123456";
+     const SECRET_KEY = "sk_test_fake123456";
 
     if (!authHeader) {
       res.status(401).json({ message: 'Authorization header missing' });
@@ -43,7 +43,7 @@ export const authenticate = async (
       return;
     }
 
-    const token = parts[1];
+    const token = parts[1];//dsds
 
     try {
       if (!JWT_SECRET) {
