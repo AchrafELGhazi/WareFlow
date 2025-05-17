@@ -18,8 +18,19 @@ import {
   Typography,
 } from 'antd';
 import { EyeOutlined, DeleteOutlined } from '@ant-design/icons';
+import type { ColumnsType } from 'antd/es/table';
 
 const { Title } = Typography;
+
+// Add a proper interface for the Company type
+interface Company {
+  company_id: string;
+  company_name: string;
+  industry: string | null;
+  manager_name: string | null;
+  clients: any[];
+  suppliers: any[];
+}
 
 const CompanyList: React.FC = () => {
   const dispatch = useDispatch();
@@ -60,53 +71,58 @@ const CompanyList: React.FC = () => {
     );
   }
 
-  const columns = [
+  // Generate industry filters, excluding null/undefined values and properly typing
+  const industryFilters = companies
+    ? Array.from(
+        new Set(
+          companies
+            .map(c => c.industry)
+            .filter((industry): industry is string => !!industry)
+        )
+      ).map(industry => ({
+        text: industry,
+        value: industry,
+      }))
+    : [];
+
+  const columns: ColumnsType<Company> = [
     {
       title: 'Company Name',
       dataIndex: 'company_name',
       key: 'company_name',
-      sorter: (a: any, b: any) => a.company_name.localeCompare(b.company_name),
+      sorter: (a, b) => a.company_name.localeCompare(b.company_name),
       render: (text: string) => <strong>{text}</strong>,
     },
     {
       title: 'Industry',
       dataIndex: 'industry',
       key: 'industry',
-      filters: companies
-        ? Array.from(new Set(companies.map(c => c.industry)))
-            .filter(Boolean)
-            .map(industry => ({
-              text: industry,
-              value: industry,
-            }))
-        : [],
-      onFilter: (value: any, record: any) => record.industry === value,
-      render: (text: string) => <Tag color='blue'>{text || 'N/A'}</Tag>,
+      filters: industryFilters,
+      onFilter: (value, record) => record.industry === value,
+      render: (text: string | null) => <Tag color='blue'>{text || 'N/A'}</Tag>,
     },
     {
       title: 'Manager',
       dataIndex: 'manager_name',
       key: 'manager_name',
-      render: (text: string) => text || 'N/A',
+      render: (text: string | null) => text || 'N/A',
     },
     {
       title: 'Clients',
       key: 'clients',
-      render: (_: any, record: any) => (
-        <Tag color='green'>{record.clients.length}</Tag>
-      ),
+      render: (_, record) => <Tag color='green'>{record.clients.length}</Tag>,
     },
     {
       title: 'Suppliers',
       key: 'suppliers',
-      render: (_: any, record: any) => (
+      render: (_, record) => (
         <Tag color='purple'>{record.suppliers.length}</Tag>
       ),
     },
     {
       title: 'Actions',
       key: 'actions',
-      render: (_: any, record: any) => (
+      render: (_, record) => (
         <Space>
           <Button
             type='primary'
