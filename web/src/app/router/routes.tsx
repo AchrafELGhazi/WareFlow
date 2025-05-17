@@ -1,3 +1,4 @@
+import CompaniesPage from '@/modules/companies/pages/CompaniesPage';
 import MePage from '@/modules/me/pages/MePage';
 import Users from '@/modules/users/pages/UsersPage';
 import { RouteObject } from 'react-router-dom';
@@ -17,9 +18,10 @@ const routes: RouteObject[] = [
     path: 'users',
     element: <Users />,
   },
-  // Warehouse routes (will be available at /app/warehouse/...)
-  // ...warehouseRoutes,
-
+  {
+    path: 'companies',
+    element: <CompaniesPage />,
+  },
   {
     path: 'me',
     element: <MePage />,

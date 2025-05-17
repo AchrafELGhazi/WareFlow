@@ -2,6 +2,25 @@ import { Request, Response } from "express";
 import CompanyServices from "../services/company.service";
 
 class CompanyController {
+  getAllCompaniesController = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const companies = await CompanyServices.getAllCompaniesService();
+      res.status(200).json({
+        success: true,
+        companies,
+      });
+    } catch (error) {
+      console.error('Error fetching all companies:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Server Error',
+      });
+    }
+  };
+
   getCompanyInfoController = async (
     req: Request,
     res: Response
@@ -12,7 +31,7 @@ class CompanyController {
       if (!company) {
         res.status(404).json({
           success: false,
-          message: "Company not found",
+          message: 'Company not found',
         });
         return;
       }
@@ -21,10 +40,10 @@ class CompanyController {
         company,
       });
     } catch (error) {
-      console.error("Error fetching company info:", error);
+      console.error('Error fetching company info:', error);
       res.status(500).json({
         success: false,
-        message: "Server Error",
+        message: 'Server Error',
       });
     }
   };
@@ -53,7 +72,7 @@ class CompanyController {
       !managerName
     ) {
       return res.status(400).send({
-        message: "All company fields are required",
+        message: 'All company fields are required',
         missingFields: Object.entries({
           companyName,
           companyDescription,
@@ -87,10 +106,10 @@ class CompanyController {
         return res.status(409).send(e);
       }
 
-      console.error("Error creating company:", e);
+      console.error('Error creating company:', e);
       return res
         .status(500)
-        .send({ message: "Internal server error", error: e.message });
+        .send({ message: 'Internal server error', error: e.message });
     }
   };
 
@@ -124,10 +143,10 @@ class CompanyController {
         success: true,
       });
     } catch (error) {
-      console.error("Error updating manager of the company:", error);
+      console.error('Error updating manager of the company:', error);
       res.status(500).json({
         success: false,
-        message: "Server Error",
+        message: 'Server Error',
       });
     }
   };
@@ -143,10 +162,10 @@ class CompanyController {
         success: true,
       });
     } catch (error) {
-      console.error("Error deleting company:", error);
+      console.error('Error deleting company:', error);
       res.status(500).json({
         success: false,
-        message: "Server Error",
+        message: 'Server Error',
       });
     }
   };

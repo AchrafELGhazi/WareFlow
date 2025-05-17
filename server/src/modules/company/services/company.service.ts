@@ -1,7 +1,11 @@
 import CompanyQueries from "../queries/company.query";
-import { CompanyInfoResult } from "../dtos/company.dto";
+import { CompanyInfoResult, CompanyWithRelationsResult } from "../dtos/company.dto";
 
 class CompanyServices {
+  async getAllCompaniesService(): Promise<CompanyWithRelationsResult[]> {
+    return await CompanyQueries.getAllCompaniesQuery();
+  }
+
   async getCompanyInfoService(
     companyId: string
   ): Promise<CompanyInfoResult | null> {
