@@ -1,3 +1,4 @@
+import MePage from '@/modules/me/pages/MePage';
 import { RouteObject } from 'react-router-dom';
 
 /**
@@ -19,7 +20,7 @@ const routes: RouteObject[] = [
 
   {
     path: 'me',
-    element: <div className='p-8'>User Profile Coming Soon</div>,
+    element: <MePage />,
   },
   {
     path: 'settings',

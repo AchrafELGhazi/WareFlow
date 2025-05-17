@@ -1,40 +1,58 @@
-import React, { useState } from 'react';
-import { useAppSelector } from '@/app/hooks';
-import { User } from '@/shared/types';
+import React, { useState, useEffect } from 'react';
+import { User, UserRole } from '@/shared/types';
 
-// This would typically come from your API or types definition
-interface ExtendedUserInfo extends User {
-  email?: string;
+interface ExtendedUserInfo {
+  userId: string;
+  username: string;
+  email?: string | null;
+  role: UserRole;
   phoneNumber?: string;
-  role?: string;
-  createdAt?: string;
-  lastLogin?: string;
-  permissions?: string[];
-  profilePicture?: string;
   department?: string;
   position?: string;
+  createdAt?: string;
+  lastLoginDisplay?: string;
+  permissions?: string[];
+  profilePicture?: string;
 }
 
 const MePage: React.FC = () => {
-  const { user } = useAppSelector(state => state.auth);
+  const [user, setUser] = useState<User | null>(null);
+  const [extendedUserInfo, setExtendedUserInfo] =
+    useState<ExtendedUserInfo | null>(null);
   const [activeTab, setActiveTab] = useState<
     'profile' | 'security' | 'preferences'
   >('profile');
 
-  // This would typically come from an API call to get full user details
-  // For now we'll mock some additional information
-  const extendedUserInfo: ExtendedUserInfo = {
-    ...user,
-    email: user?.email || 'user@example.com',
-    phoneNumber: '+1 (555) 123-4567',
-    createdAt: '2023-06-15',
-    lastLogin: new Date().toISOString().split('T')[0],
-    permissions: ['read:all', 'write:own', 'manage:inventory'],
-    department: 'Operations',
-    position: 'Warehouse Manager',
-  };
+  useEffect(() => {
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      try {
+        const userData = JSON.parse(userString) as User;
+        setUser(userData);
 
-  if (!user) {
+        setExtendedUserInfo({
+          userId: userData.userId,
+          username: userData.username,
+          email: userData.email,
+          role: userData.role,
+          phoneNumber: '+1 (555) 123-4567',
+          department: 'Operations',
+          position: 'Warehouse Manager',
+          createdAt: userData.createdAt
+            ? new Date(userData.createdAt).toLocaleDateString()
+            : '2023-06-15',
+          lastLoginDisplay: userData.lastLogin
+            ? new Date(userData.lastLogin).toLocaleDateString()
+            : new Date().toLocaleDateString(),
+          permissions: ['read:all', 'write:own', 'manage:inventory'],
+        });
+      } catch (error) {
+        console.error('Error parsing user from localStorage:', error);
+      }
+    }
+  }, []);
+
+  if (!user || !extendedUserInfo) {
     return (
       <div className='flex items-center justify-center min-h-screen p-4'>
         <div className='bg-white dark:bg-gray-800 shadow rounded-lg p-8 max-w-md w-full'>
@@ -71,7 +89,7 @@ const MePage: React.FC = () => {
             <h1 className='text-3xl font-bold'>{extendedUserInfo.username}</h1>
             <div className='flex flex-wrap gap-3 mt-2'>
               <div className='bg-blue-800 px-3 py-1 rounded-full text-sm'>
-                {extendedUserInfo.role || 'User'}
+                {extendedUserInfo.role}
               </div>
               <div className='bg-blue-800 px-3 py-1 rounded-full text-sm'>
                 {extendedUserInfo.department}
@@ -144,7 +162,7 @@ const MePage: React.FC = () => {
                     Email Address
                   </label>
                   <div className='mt-1 text-gray-900 dark:text-white'>
-                    {extendedUserInfo.email}
+                    {extendedUserInfo.email || 'Not provided'}
                   </div>
                 </div>
 
@@ -153,7 +171,7 @@ const MePage: React.FC = () => {
                     Phone Number
                   </label>
                   <div className='mt-1 text-gray-900 dark:text-white'>
-                    {extendedUserInfo.phoneNumber}
+                    {extendedUserInfo.phoneNumber || 'Not provided'}
                   </div>
                 </div>
               </div>
@@ -164,7 +182,7 @@ const MePage: React.FC = () => {
                     Department
                   </label>
                   <div className='mt-1 text-gray-900 dark:text-white'>
-                    {extendedUserInfo.department}
+                    {extendedUserInfo.department || 'Not assigned'}
                   </div>
                 </div>
 
@@ -173,7 +191,7 @@ const MePage: React.FC = () => {
                     Position
                   </label>
                   <div className='mt-1 text-gray-900 dark:text-white'>
-                    {extendedUserInfo.position}
+                    {extendedUserInfo.position || 'Not assigned'}
                   </div>
                 </div>
 
@@ -182,7 +200,7 @@ const MePage: React.FC = () => {
                     Member Since
                   </label>
                   <div className='mt-1 text-gray-900 dark:text-white'>
-                    {extendedUserInfo.createdAt}
+                    {extendedUserInfo.createdAt || 'Unknown'}
                   </div>
                 </div>
               </div>
@@ -213,218 +231,26 @@ const MePage: React.FC = () => {
           </div>
         )}
 
+        {/* Other tabs would go here */}
         {activeTab === 'security' && (
           <div className='space-y-6'>
             <h3 className='text-lg font-medium text-gray-900 dark:text-white'>
-              Security
+              Security Settings
             </h3>
-
-            <div className='space-y-4'>
-              <div>
-                <label className='block text-sm font-medium text-gray-500 dark:text-gray-400'>
-                  Last Login
-                </label>
-                <div className='mt-1 text-gray-900 dark:text-white'>
-                  {extendedUserInfo.lastLogin}
-                </div>
-              </div>
-
-              <div className='pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <h4 className='text-md font-medium text-gray-900 dark:text-white'>
-                  Password
-                </h4>
-                <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
-                  Last changed 3 months ago
-                </p>
-
-                <button className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'>
-                  Change Password
-                </button>
-              </div>
-
-              <div className='pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <h4 className='text-md font-medium text-gray-900 dark:text-white'>
-                  Two-Factor Authentication
-                </h4>
-                <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
-                  Secure your account with two-factor authentication
-                </p>
-
-                <div className='mt-4 flex items-center'>
-                  <div className='flex items-center h-5'>
-                    <input
-                      id='2fa'
-                      name='2fa'
-                      type='checkbox'
-                      className='h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
-                    />
-                  </div>
-                  <div className='ml-3 text-sm'>
-                    <label
-                      htmlFor='2fa'
-                      className='font-medium text-gray-700 dark:text-gray-300'
-                    >
-                      Enable two-factor authentication
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div className='pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <h4 className='text-md font-medium text-gray-900 dark:text-white'>
-                  Sessions
-                </h4>
-                <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
-                  Manage your active sessions
-                </p>
-
-                <div className='mt-4 space-y-4'>
-                  <div className='flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg'>
-                    <div>
-                      <div className='font-medium text-gray-900 dark:text-white'>
-                        Current Session
-                      </div>
-                      <div className='text-sm text-gray-500 dark:text-gray-400'>
-                        Chrome on Windows • {new Date().toLocaleString()}
-                      </div>
-                    </div>
-                    <div className='text-sm text-green-600 dark:text-green-400 font-medium'>
-                      Active Now
-                    </div>
-                  </div>
-                </div>
-
-                <button className='mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'>
-                  Sign Out All Sessions
-                </button>
-              </div>
-            </div>
+            <p className='text-gray-600 dark:text-gray-400'>
+              Security settings will be displayed here.
+            </p>
           </div>
         )}
 
         {activeTab === 'preferences' && (
           <div className='space-y-6'>
             <h3 className='text-lg font-medium text-gray-900 dark:text-white'>
-              Preferences
+              User Preferences
             </h3>
-
-            <div className='space-y-4'>
-              <div>
-                <h4 className='text-md font-medium text-gray-900 dark:text-white'>
-                  Appearance
-                </h4>
-
-                <div className='mt-4 space-y-4'>
-                  <div className='flex items-start'>
-                    <div className='flex items-center h-5'>
-                      <input
-                        id='darkMode'
-                        name='darkMode'
-                        type='checkbox'
-                        className='h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
-                      />
-                    </div>
-                    <div className='ml-3 text-sm'>
-                      <label
-                        htmlFor='darkMode'
-                        className='font-medium text-gray-700 dark:text-gray-300'
-                      >
-                        Dark Mode
-                      </label>
-                      <p className='text-gray-500 dark:text-gray-400'>
-                        Use dark theme for the application
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className='pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <h4 className='text-md font-medium text-gray-900 dark:text-white'>
-                  Notifications
-                </h4>
-
-                <div className='mt-4 space-y-4'>
-                  <div className='flex items-start'>
-                    <div className='flex items-center h-5'>
-                      <input
-                        id='emailNotifs'
-                        name='emailNotifs'
-                        type='checkbox'
-                        defaultChecked
-                        className='h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
-                      />
-                    </div>
-                    <div className='ml-3 text-sm'>
-                      <label
-                        htmlFor='emailNotifs'
-                        className='font-medium text-gray-700 dark:text-gray-300'
-                      >
-                        Email Notifications
-                      </label>
-                      <p className='text-gray-500 dark:text-gray-400'>
-                        Receive notifications via email
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className='flex items-start'>
-                    <div className='flex items-center h-5'>
-                      <input
-                        id='systemNotifs'
-                        name='systemNotifs'
-                        type='checkbox'
-                        defaultChecked
-                        className='h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
-                      />
-                    </div>
-                    <div className='ml-3 text-sm'>
-                      <label
-                        htmlFor='systemNotifs'
-                        className='font-medium text-gray-700 dark:text-gray-300'
-                      >
-                        System Notifications
-                      </label>
-                      <p className='text-gray-500 dark:text-gray-400'>
-                        Receive in-app notifications
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className='pt-4 border-t border-gray-200 dark:border-gray-700'>
-                <h4 className='text-md font-medium text-gray-900 dark:text-white'>
-                  Language Settings
-                </h4>
-
-                <div className='mt-4'>
-                  <label
-                    htmlFor='language'
-                    className='block text-sm font-medium text-gray-700 dark:text-gray-300'
-                  >
-                    Interface Language
-                  </label>
-                  <select
-                    id='language'
-                    name='language'
-                    className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white'
-                    defaultValue='en'
-                  >
-                    <option value='en'>English</option>
-                    <option value='es'>Español</option>
-                    <option value='fr'>Français</option>
-                    <option value='de'>Deutsch</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div className='flex justify-end'>
-              <button className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'>
-                Save Preferences
-              </button>
-            </div>
+            <p className='text-gray-600 dark:text-gray-400'>
+              Preference settings will be displayed here.
+            </p>
           </div>
         )}
       </div>
