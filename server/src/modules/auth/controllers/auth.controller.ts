@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import authService from '../services/auth.service';
 import { SignupDto, LoginDto } from '../dtos/auth.dto';
+import prisma from '../../../../prisma/client';
 
 class AuthController {
   signup = async (req: Request, res: Response): Promise<void> => {
@@ -79,14 +80,49 @@ class AuthController {
 
   getCurrentUser = async (req: Request, res: Response): Promise<void> => {
     try {
-      const user = req.user;
-
-      if (!user) {
+      const userId = req.user?.userId;
+      console.log(userId)
+      if (!userId) {
         res.status(401).json({ message: 'Not authenticated' });
         return;
       }
 
-      res.status(200).json({ user });
+      const userWithDetails = await prisma.user.findUnique({
+        where: { userId },
+        include: {
+          profile: {
+            include: {
+              address: true,
+              company: true,
+            },
+          },
+          staff: {
+            include: {
+              job: true,
+              warehouseManaged: true,
+            },
+          },
+          client: {
+            include: {
+              company: true,
+            },
+          },
+          supplier: {
+            include: {
+              company: true,
+            },
+          },
+          vendor: true,
+        },
+      });
+
+      if (!userWithDetails) {
+        res.status(404).json({ message: 'User not found' });
+        return;
+      }
+
+      // Return full user details
+      res.status(200).json({ user: userWithDetails });
     } catch (error) {
       console.error(
         `Get current user error: ${

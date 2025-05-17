@@ -3,12 +3,11 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthMiddleware } from './middlewares/AuthMiddleware';
 import { GuestMiddleware } from './middlewares/GuestMiddleware';
 import LoadingSpinner from '@/shared/components/LoadingSpinner';
-import AuthLayout from '@/shared/Layout/AuthLayout';
 import NotFound from '@/pages/NotFound';
-import MainLayout from '@/shared/Layout/MainLayout';
 import authRoutes from '@/modules/auth/routes/authRoutes';
-import routes from './routes';
 import Home from '@/modules/Home';
+import routes from './routes';
+import AppLayout from '@/shared/Layout/AppLayout';
 
 const LoadingFallback = () => (
   <div className='flex items-center justify-center min-h-screen bg-gray-900'>
@@ -20,17 +19,10 @@ const Router = () => {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
-        {/* Public routes */}
         <Route path='/' element={<Home />} />
-        {/* <Route path='/about' element={<About />} />
-        <Route path='/terms' element={<TermsOfService />} /> */}
 
-        {/* Guest-protected routes (auth pages) */}
         <Route element={<GuestMiddleware />}>
-          <Route
-            path='/auth'
-            element={<AuthLayout title='Authentication' children={null} />}
-          >
+          <Route path='/auth'>
             {authRoutes.map(route => (
               <Route
                 key={route.path}
@@ -42,9 +34,8 @@ const Router = () => {
           </Route>
         </Route>
 
-        {/* Main authenticated app */}
         <Route element={<AuthMiddleware />}>
-          <Route path='/app' element={<MainLayout />}>
+          <Route path='/app' element={<AppLayout />}>
             {routes.map(route => (
               <Route
                 key={route.path}
@@ -56,7 +47,6 @@ const Router = () => {
           </Route>
         </Route>
 
-        {/* 404 page */}
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Suspense>

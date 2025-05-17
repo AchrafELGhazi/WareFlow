@@ -1,28 +1,30 @@
 import { RouteObject } from 'react-router-dom';
 
-// Uncomment as you implement each feature module
-// import userRoutes from '@/modules/user/routes/userRoutes';
-// import warehouseRoutes from '@/modules/warehouse/routes/warehouseRoutes';
-// import dashboardRoutes from '@/modules/dashboard/routes/dashboardRoutes';
-
 /**
  * Combined application routes
  * Aggregates all feature module routes for the authenticated part of the app
- * Note: Auth routes are handled separately in the Router component
+ * Note: These routes will be mounted under /app in the Router
  */
 const routes: RouteObject[] = [
-  // Dashboard routes (should be available at /dashboard)
-  // ...dashboardRoutes,
+  {
+    path: 'dashboard',
+    element: <div className='p-8'>Dashboard Coming Soon</div>,
+  },
 
-  // User routes (should be available at /users/...)
+  // User routes (will be available at /app/users/...)
   // ...userRoutes,
 
-  // Warehouse routes (should be available at /warehouse/...)
+  // Warehouse routes (will be available at /app/warehouse/...)
   // ...warehouseRoutes,
 
-
-  // Add more feature module routes here as you develop them
-
+  {
+    path: 'me',
+    element: <div className='p-8'>User Profile Coming Soon</div>,
+  },
+  {
+    path: 'settings',
+    element: <div className='p-8'>Settings Page Coming Soon</div>,
+  },
 ];
 
 export default routes;

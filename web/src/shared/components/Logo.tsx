@@ -15,7 +15,7 @@ const Logo: React.FC<LogoProps> = ({ className = '' }) => {
       >
         <path d='M20 5L35 30H5L20 5Z' fill='currentColor' />
       </svg>
-      <span className='text-lg font-bold'>Your App</span>
+      <span className='text-lg font-bold'>Wareflow</span>
     </div>
   );
 };

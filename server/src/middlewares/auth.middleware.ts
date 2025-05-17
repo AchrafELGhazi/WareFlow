@@ -71,7 +71,7 @@ export const authenticate = async (
         res.status(401).json({ message: 'Account is inactive or not found' });
         return;
       }
-
+      console.log("done here")
       next();
     } catch (error) {
       console.warn('Token validation failed:', error);

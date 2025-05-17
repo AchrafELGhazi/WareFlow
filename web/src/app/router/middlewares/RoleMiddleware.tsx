@@ -20,7 +20,7 @@ export const RoleMiddleware: React.FC<RoleMiddlewareProps> = ({
   const hasRequiredRole = user && allowedRoles.includes(user.role);
 
   if (!hasRequiredRole) {
-    return <Navigate to='/dashboard' replace />;
+    return <Navigate to='/app/dashboard' replace />;
   }
 
   return <Outlet />;

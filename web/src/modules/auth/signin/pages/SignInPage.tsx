@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthLayout from '../../../../shared/Layout/AuthLayout';
+import AuthLayout from '../../Layout/AuthLayout';
 import SignInForm from '../components/SignInForm';
 
 const SignInPage: React.FC = () => {

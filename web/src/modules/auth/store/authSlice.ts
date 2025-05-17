@@ -9,11 +9,24 @@ interface AuthState {
   isLoading: boolean;
 }
 
+// Try to parse user data from localStorage
+const getUserFromStorage = (): User | null => {
+  const userString = localStorage.getItem('user');
+  if (!userString) return null;
+
+  try {
+    return JSON.parse(userString);
+  } catch (error) {
+    console.error('Failed to parse user data from localStorage:', error);
+    return null;
+  }
+};
+
 // Initial state
 const initialState: AuthState = {
-  user: null,
+  user: getUserFromStorage(),
   token: localStorage.getItem('token'),
-  isAuthenticated: !!localStorage.getItem('token'),
+  isAuthenticated: !!(localStorage.getItem('token') && getUserFromStorage()),
   isLoading: false,
 };
 
@@ -30,7 +43,10 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;
+
+      // Store both token and user in localStorage
       localStorage.setItem('token', action.payload.token);
+      localStorage.setItem('user', JSON.stringify(action.payload.user));
     },
 
     // Clear user credentials on logout
@@ -38,7 +54,10 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
+
+      // Clear both from localStorage
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
     },
 
     // Update loading state
@@ -50,6 +69,9 @@ const authSlice = createSlice({
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       state.isAuthenticated = true;
+
+      // Update user in localStorage when it changes
+      localStorage.setItem('user', JSON.stringify(action.payload));
     },
   },
 });
