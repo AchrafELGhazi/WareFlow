@@ -1,40 +1,17 @@
-import {
-  Routes,
-  BrowserRouter as Router,
-  Route,
-  Navigate,
-} from 'react-router-dom';
-import Navbar from './layout/Navbar';
-import { Suspense } from 'react';
-import { routes } from './routes';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import Router from './app/router';
 
-function App() {
-  const isAuthenticated = false;
-
+const App: React.FC = () => {
   return (
-    <>
-      <Router>
-        <Navbar />
-        <Suspense fallback={<h2>Loading...</h2>}>
-          <Routes>
-            {routes.map(({ path, element, protected: isProtected }) => (
-              <Route
-                key={path}
-                path={path}
-                element={
-                  isProtected && !isAuthenticated ? (
-                    <Navigate to='/' />
-                  ) : (
-                    element
-                  )
-                }
-              />
-            ))}
-          </Routes>
-        </Suspense>
-      </Router>
-    </>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </Provider>
   );
-}
+};
 
 export default App;

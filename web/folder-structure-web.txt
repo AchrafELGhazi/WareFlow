@@ -1,0 +1,68 @@
+src/
+├── app/                       # Core application setup
+│   ├── store/                 # Redux setup
+│   │   ├── store.ts           # Store configuration
+│   │   ├── hooks.ts           # Custom Redux hooks
+│   │   └── rootReducer.ts     # Combined reducers
+│   ├── router/                # Routing setup
+│   │   ├── index.tsx          # Main router configuration
+│   │   ├── routes.ts          # Combined routes from all features
+│   │   └── middlewares/       # Route middlewares
+│   │       ├── AuthMiddleware.tsx   # Authentication protection
+│   │       ├── RoleMiddleware.tsx   # Role-based access control
+│   │       └── PermissionMiddleware.tsx  # Permission checks
+│   └── providers/             # Context providers
+│       └── AppProvider.tsx    # Combined providers
+├── assets/                    # Static assets
+├── components/                # Shared components
+├── config/                    # Application config
+│   ├── constants.ts
+│   └── api.ts                 # API config
+├── features/                  # Feature modules
+│   ├── auth/                  # Authentication feature
+│   │   ├── api/               # Auth API calls
+│   │   │   └── authApi.ts
+│   │   ├── components/        # Auth components
+│   │   │   ├── LoginForm.tsx
+│   │   │   └── LogoutButton.tsx
+│   │   ├── pages/             # Auth pages
+│   │   │   ├── LoginPage.tsx
+│   │   │   └── RegisterPage.tsx
+│   │   ├── routes/            # Auth routes
+│   │   │   └── index.ts       # Export auth routes
+│   │   ├── store/             # Auth state
+│   │   │   └── authSlice.ts
+│   │   ├── types/             # Auth-specific types
+│   │   │   └── auth.types.ts
+│   │   └── utils/             # Auth utilities
+│   │       └── tokenUtils.ts
+│   ├── user/                  # User management feature
+│   │   ├── api/
+│   │   │   └── userApi.ts
+│   │   ├── components/
+│   │   │   ├── UserList.tsx
+│   │   │   └── UserForm.tsx
+│   │   ├── pages/
+│   │   │   ├── UsersPage.tsx
+│   │   │   └── UserDetailPage.tsx
+│   │   ├── routes/
+│   │   │   └── index.ts       # Export user routes
+│   │   ├── store/
+│   │   │   └── userSlice.ts
+│   │   └── types/
+│   │       └── user.types.ts
+│   └── warehouse/             # Warehouse feature
+│       ├── api/
+│       ├── components/
+│       ├── pages/
+│       ├── routes/
+│       ├── store/
+│       └── types/
+├── hooks/                     # Custom hooks
+├── services/                  # Shared services
+│   └── api/
+│       └── baseApi.ts         # RTK Query base
+├── types/                     # Shared types
+├── utils/                     # Shared utilities
+├── App.tsx                    # Main App component
+└── main.tsx                   # Entry point
