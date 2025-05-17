@@ -1,10 +1,14 @@
 import { Router } from 'express';
 import userController from '../controllers/user.controller';
-import { getUserInfoSchema } from '../schemas/user.schema';
+import { getAllUsersSchema, getUserInfoSchema } from '../schemas/user.schema';
 import { authenticate, validateSchema } from '../../../middlewares';
 
 const userRouter = Router();
-userRouter.get('/', userController.getAllUsers);
+userRouter.get(
+  '/',
+  // validateSchema(getAllUsersSchema),
+  userController.getAllUsers
+);
 userRouter.get(
   '/:userId',
   validateSchema(getUserInfoSchema),

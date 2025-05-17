@@ -4,7 +4,9 @@ import UserService from "../services/user.service";
 class UserController {
   getAllUsers = async (req: Request, res: Response): Promise<void> => {
     try {
+      console.log("i entred user controller")
       const users = await UserService.getAllUsersService();
+      console.log(users)
       res.status(200).json({
         success: true,
         users,
