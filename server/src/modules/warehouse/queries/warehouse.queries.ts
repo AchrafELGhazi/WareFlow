@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 class WarehouseQueries {
   private prisma: PrismaClient;
 
@@ -6,52 +6,128 @@ class WarehouseQueries {
     this.prisma = new PrismaClient();
   }
 
-  getWarehouseInfoQuery = (warehouseId: string) => {
-    return this.prisma.$queryRaw`
-        SELECT w.warehouse_name, s.first_name, s.last_name
-        FROM warehouses w LEFT OUTER JOIN staff s
-        ON w.manager_id = s.staff_id
-        WHERE warehouse_id = ${warehouseId}
-      `;
+  getAllWarehousesQuery = async () => {
+    return this.prisma.warehouse.findMany({
+      include: {
+        manager: {
+          include: {
+            job: true,
+          },
+        },
+        products: {
+          include: {
+            category: true,
+          },
+        },
+        transactions: {
+          include: {
+            product: true,
+            staff: true,
+          },
+          orderBy: {
+            transactionDate: 'desc',
+          },
+          take: 20, // Limit the number of transactions
+        },
+      },
+    });
+  };
+
+  getWarehouseInfoQuery = async (warehouseId: string) => {
+    return this.prisma.warehouse.findUnique({
+      where: {
+        warehouseId,
+      },
+      include: {
+        manager: {
+          include: {
+            job: true,
+          },
+        },
+        products: {
+          include: {
+            category: true,
+          },
+        },
+        transactions: {
+          include: {
+            product: true,
+            staff: true,
+          },
+          orderBy: {
+            transactionDate: 'desc',
+          },
+          take: 50, // Limit the number of transactions
+        },
+      },
+    });
   };
 
   createWarehouseQuery = (warehouseName: string, managerId: string) => {
-    return this.prisma.$queryRaw`
-      INSERT INTO warehouses (warehouse_id, warehouse_name, manager_id)
-      VALUES (gen_random_uuid(), ${warehouseName}, ${managerId})
-      RETURNING *;
-    `;
+    return this.prisma.warehouse.create({
+      data: {
+        warehouseName,
+        managerId,
+      },
+      include: {
+        manager: true,
+      },
+    });
   };
 
   updateWarehouseManagerQuery = (warehouseId: string, managerId: string) => {
-    return this.prisma.$queryRaw`
-      UPDATE warehouses
-      SET manager_id = ${managerId}
-      WHERE warehouse_id = ${warehouseId}
-    `;
+    return this.prisma.warehouse.update({
+      where: {
+        warehouseId,
+      },
+      data: {
+        managerId,
+      },
+      include: {
+        manager: true,
+      },
+    });
   };
 
   async deleteWarehouseQuery(warehouseId: string) {
-    return this.prisma.$transaction([
-      this.prisma.$queryRaw`
-        DELETE FROM inventory_transactions 
-        WHERE product_id IN (
-          SELECT product_id FROM products WHERE warehouse_id = ${warehouseId}
-        )
-      `,
-      this.prisma.$queryRaw`
-        DELETE FROM product_price_history 
-        WHERE product_id IN (
-          SELECT product_id FROM products WHERE warehouse_id = ${warehouseId}
-        )
-      `,
-      this.prisma.$queryRaw`
-        DELETE FROM products WHERE warehouse_id = ${warehouseId}
-      `,
-      this.prisma.$queryRaw`
-        DELETE FROM warehouses WHERE warehouse_id = ${warehouseId}
-      `,
-    ]);
+    // Using Prisma's transaction capabilities more elegantly
+    return this.prisma.$transaction(async tx => {
+      // First, get all product IDs in this warehouse
+      const products = await tx.product.findMany({
+        where: { warehouseId },
+        select: { productId: true },
+      });
+
+      const productIds = products.map(p => p.productId);
+
+      // Delete related records
+      if (productIds.length > 0) {
+        await tx.inventoryTransaction.deleteMany({
+          where: { productId: { in: productIds } },
+        });
+
+        await tx.productPriceHistory.deleteMany({
+          where: { productId: { in: productIds } },
+        });
+
+        await tx.clientOrderItem.deleteMany({
+          where: { productId: { in: productIds } },
+        });
+
+        await tx.supplierOrderItem.deleteMany({
+          where: { productId: { in: productIds } },
+        });
+
+        await tx.product.deleteMany({
+          where: { warehouseId },
+        });
+      }
+
+      // Delete the warehouse itself
+      return tx.warehouse.delete({
+        where: { warehouseId },
+      });
+    });
   }
 }
 
