@@ -1,7 +1,7 @@
 import React from 'react';
 import { Warehouse } from '../api/warehouseApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedWarehouse, setFilterText } from '../store/warehouseSlice';
+import { setFilterText } from '../store/warehouseSlice';
 import { RootState } from '@/app/store';
 
 interface WarehouseListProps {

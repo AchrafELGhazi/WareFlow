@@ -1,12 +1,11 @@
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 const BASE_URL = 'http://localhost:5000/api';
 
 export const handlers = [
-  rest.get(`${BASE_URL}/staff`, (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
+  http.get(`${BASE_URL}/staff`, () => {
+    return HttpResponse.json(
+      {
         success: true,
         staff: [
           {
@@ -40,7 +39,8 @@ export const handlers = [
             userId: 'user-3',
           },
         ],
-      })
+      },
+      { status: 200 }
     );
   }),
 ];

@@ -40,7 +40,6 @@ const WarehousesPage: React.FC = () => {
   });
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const selectedWarehouse = useSelector(
     (state: RootState) => state.warehouse.selectedWarehouse
   );
