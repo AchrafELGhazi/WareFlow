@@ -8,5 +8,11 @@
         "distDir": "dist"
       }
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!_next|favicon.ico|assets|.*\\.\\w+).*)",
+      "destination": "/index.html"
+    }
   ]
 }
