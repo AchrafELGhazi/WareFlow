@@ -1,12 +1,6 @@
 import { baseApi } from '@/services/baseApi';
-import { UserRole } from '@/shared/types';
+import { User } from '@/shared/types';
 
-export interface User {
-  userId: string;
-  username: string;
-  email: string | null;
-  role: UserRole;
-}
 
 export interface SignupRequest {
   username: string;

@@ -36,7 +36,6 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
         password: data.password,
       }).unwrap();
 
-      // Set user credentials in Redux store
       dispatch(
         setCredentials({
           user: result.user,
@@ -44,15 +43,12 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
         })
       );
 
-      // Call the onSuccess callback if provided
       if (onSuccess) {
         onSuccess();
       }
 
-      // Redirect to the page the user was trying to access
       navigate(from, { replace: true });
     } catch (err) {
-      // Error is handled by RTK Query
       console.error('Failed to sign in', err);
     }
   };

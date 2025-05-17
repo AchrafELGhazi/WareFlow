@@ -3,11 +3,12 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthMiddleware } from './middlewares/AuthMiddleware';
 import { GuestMiddleware } from './middlewares/GuestMiddleware';
 import LoadingSpinner from '@/shared/components/LoadingSpinner';
-// import AuthLayout from '@/shared/Layout/AuthLayout';
+import AuthLayout from '@/shared/Layout/AuthLayout';
 import NotFound from '@/pages/NotFound';
 import MainLayout from '@/shared/Layout/MainLayout';
 import authRoutes from '@/modules/auth/routes/authRoutes';
 import routes from './routes';
+import Home from '@/modules/Home';
 
 const LoadingFallback = () => (
   <div className='flex items-center justify-center min-h-screen bg-gray-900'>
@@ -19,9 +20,17 @@ const Router = () => {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
-        {/* Guest-protected routes */}
+        {/* Public routes */}
+        <Route path='/' element={<Home />} />
+        {/* <Route path='/about' element={<About />} />
+        <Route path='/terms' element={<TermsOfService />} /> */}
+
+        {/* Guest-protected routes (auth pages) */}
         <Route element={<GuestMiddleware />}>
-          <Route path='/auth'>
+          <Route
+            path='/auth'
+            element={<AuthLayout title='Authentication' children={null} />}
+          >
             {authRoutes.map(route => (
               <Route
                 key={route.path}
@@ -35,7 +44,7 @@ const Router = () => {
 
         {/* Main authenticated app */}
         <Route element={<AuthMiddleware />}>
-          <Route path='/' element={<MainLayout />}>
+          <Route path='/app' element={<MainLayout />}>
             {routes.map(route => (
               <Route
                 key={route.path}
@@ -43,7 +52,7 @@ const Router = () => {
                 element={route.element}
               />
             ))}
-            <Route index element={<Navigate to='/dashboard' replace />} />
+            <Route index element={<Navigate to='/app/dashboard' replace />} />
           </Route>
         </Route>
 
