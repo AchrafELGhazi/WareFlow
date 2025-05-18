@@ -52,11 +52,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
                 </div>
 
                 {/* Decorative tech elements */}
-                <div className='absolute -bottom-2 -right-2 w-6 h-6 bg-blue-400 rounded-full flex items-center justify-center'>
-                  <div className='w-3 h-3 bg-white rounded-full'></div>
-                </div>
-                <div className='absolute -top-1 -left-1 w-4 h-4 bg-indigo-300 rounded-full'></div>
-
+               
                 {/* Animated pulse ring */}
                 <div className='absolute inset-0 rounded-2xl border border-indigo-500 animate-ping opacity-30'></div>
               </div>
@@ -71,11 +67,6 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
                 </span>
               </h2>
 
-              {/* Decorative tech badge */}
-              <div className='absolute -right-2 top-0 px-2 py-1 bg-gradient-to-r from-indigo-500 to-blue-500 text-white text-[10px] rounded-full flex items-center'>
-                <span className='inline-block w-1.5 h-1.5 bg-white rounded-full mr-1 animate-pulse'></span>
-                SECURE
-              </div>
             </div>
 
             {/* Form content */}

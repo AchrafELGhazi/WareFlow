@@ -2,6 +2,7 @@ import React from 'react';
 import HeroSection from './components/HeroSection';
 import Footer from '@/layout/Footer';
 import { motion } from 'framer-motion';
+import Navbar from './components/Navbar';
 
 const Home: React.FC = () => {
   return (
@@ -22,6 +23,8 @@ const Home: React.FC = () => {
           ease: 'linear',
         }}
       />
+      {/* Add the Navbar component here */}
+      <Navbar />
       <HeroSection />
 
       <Footer />

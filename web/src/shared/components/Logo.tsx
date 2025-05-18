@@ -2,20 +2,53 @@ import React from 'react';
 
 interface LogoProps {
   className?: string;
+  size?: 'sm' | 'md' | 'lg';
+  showAnimation?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ className = '' }) => {
+const Logo: React.FC<LogoProps> = ({
+  className = '',
+  size = 'md',
+  showAnimation = false,
+}) => {
+  // Size mappings for different size options
+  const sizeClasses = {
+    sm: 'w-10 h-10',
+    md: 'w-16 h-16',
+    lg: 'w-20 h-20',
+  };
+
+  const iconSizes = {
+    sm: 'h-6 w-6',
+    md: 'h-10 w-10',
+    lg: 'h-12 w-12',
+  };
+
   return (
-    <div className={`flex items-center ${className}`}>
-      <svg
-        className='w-8 h-8 mr-2'
-        viewBox='0 0 40 40'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
+    <div className={`relative ${className}`}>
+      <div
+        className={`${sizeClasses[size]} bg-gradient-to-r from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center`}
       >
-        <path d='M20 5L35 30H5L20 5Z' fill='currentColor' />
-      </svg>
-      <span className='text-lg font-bold'>Wareflow</span>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className={`${iconSizes[size]} text-white`}
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={2}
+            d='M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10'
+          />
+        </svg>
+      </div>
+
+      {/* Animated pulse ring - only show if animation is enabled */}
+      {showAnimation && (
+        <div className='absolute inset-0 rounded-2xl border border-indigo-500 animate-ping opacity-30'></div>
+      )}
     </div>
   );
 };

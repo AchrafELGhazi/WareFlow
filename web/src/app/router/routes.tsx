@@ -1,6 +1,8 @@
 import CompaniesPage from '@/modules/companies/pages/CompaniesPage';
+import Dashboard from '@/modules/dashboard/pages/Dashboard';
 import MePage from '@/modules/me/pages/MePage';
 import Users from '@/modules/users/pages/UsersPage';
+import ProductsPage from '@/modules/users/products/ProductsPage';
 import WarehousesPage from '@/modules/warehouses/pages/WarehousesPage';
 import { RouteObject } from 'react-router-dom';
 
@@ -10,11 +12,6 @@ import { RouteObject } from 'react-router-dom';
  * Note: These routes will be mounted under /app in the Router
  */
 const routes: RouteObject[] = [
-  {
-    path: 'dashboard',
-    element: <div className='p-8'>Dashboard Coming Soon</div>,
-  },
-
   {
     path: 'users',
     element: <Users />,
@@ -30,6 +27,14 @@ const routes: RouteObject[] = [
   {
     path: 'warehouses',
     element: <WarehousesPage />,
+  },
+  {
+    path: 'dashboard',
+    element: <Dashboard />,
+  },
+  {
+    path: 'products',
+    element: <ProductsPage />,
   },
   {
     path: 'settings',
