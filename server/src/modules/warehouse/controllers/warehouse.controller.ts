@@ -1,4 +1,3 @@
-// warehouse.controller.ts
 import { Request, Response } from 'express';
 import WarehouseServices from '../services/warehouse.services';
 

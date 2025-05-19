@@ -118,23 +118,23 @@ model Vendor {
 }
 
 model Address {
-  addressId     String   @id @default(uuid()) @map("address_id")
-  profileId     String   @unique @map("profile_id")
-  profile       Profile  @relation(fields: [profileId], references: [profileId])
-  streetAddress String?  @map("street_address")
+  addressId     String  @id @default(uuid()) @map("address_id")
+  profileId     String  @unique @map("profile_id")
+  profile       Profile @relation(fields: [profileId], references: [profileId])
+  streetAddress String? @map("street_address")
   city          String
   state         String?
-  postalCode    String?  @map("postal_code")
+  postalCode    String? @map("postal_code")
   country       String
 
   @@map("addresses")
 }
 
 model Job {
-  jobCode        String   @id @default(uuid()) @map("job_code")
-  jobDescription String   @map("job_description")
-  jobChargeHour  Int      @default(0) @map("job_charge_hour")
-  staff          Staff[]  @relation("staff_job")
+  jobCode        String  @id @default(uuid()) @map("job_code")
+  jobDescription String  @map("job_description")
+  jobChargeHour  Int     @default(0) @map("job_charge_hour")
+  staff          Staff[] @relation("staff_job")
 
   @@map("jobs")
 }
@@ -159,6 +159,7 @@ model Product {
   category              Category               @relation("category_products", fields: [categoryId], references: [categoryId])
   clientId              String?                @map("client_id")
   client                Client?                @relation(fields: [clientId], references: [clientId])
+  quantity              Int?
   priceHistory          ProductPriceHistory[]
   clientOrderItems      ClientOrderItem[]
   supplierOrderItems    SupplierOrderItem[]
@@ -191,7 +192,6 @@ model Company {
 
   @@map("companies")
 }
-
 
 model ClientOrder {
   clientOrderId String            @id @default(uuid()) @map("client_order_id")
@@ -271,29 +271,6 @@ model InventoryTransaction {
 
   @@map("inventory_transactions")
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // these two models are here for documentation purposes
 // and are not used in the actual database

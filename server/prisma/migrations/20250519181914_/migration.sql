@@ -117,6 +117,7 @@ CREATE TABLE "products" (
     "warehouse_id" TEXT NOT NULL,
     "category_id" TEXT NOT NULL,
     "client_id" TEXT,
+    "quantity" INTEGER,
 
     CONSTRAINT "products_pkey" PRIMARY KEY ("product_id")
 );
