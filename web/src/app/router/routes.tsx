@@ -1,9 +1,5 @@
-import CompaniesPage from '@/modules/companies/pages/CompaniesPage';
-import Dashboard from '@/modules/dashboard/pages/Dashboard';
 import MePage from '@/modules/me/pages/MePage';
 import Users from '@/modules/users/pages/UsersPage';
-import ProductsPage from '@/modules/users/products/ProductsPage';
-import WarehousesPage from '@/modules/warehouses/pages/WarehousesPage';
 import { RouteObject } from 'react-router-dom';
 
 /**
@@ -17,24 +13,12 @@ const routes: RouteObject[] = [
     element: <Users />,
   },
   {
-    path: 'companies',
-    element: <CompaniesPage />,
-  },
-  {
     path: 'me',
     element: <MePage />,
   },
   {
-    path: 'warehouses',
-    element: <WarehousesPage />,
-  },
-  {
     path: 'dashboard',
-    element: <Dashboard />,
-  },
-  {
-    path: 'products',
-    element: <ProductsPage />,
+    element: <p >this is dashboard</p>
   },
   {
     path: 'settings',
